@@ -17,20 +17,27 @@
     <body>
         <nav class="navbar">
             <div class="mainWrapper">
-                <ul>
-                    <li><a class="nav-items" href="index.php">Home</a></li>
-                    <li><a class="nav-items" href="index.php#team">The Team</a></li>
-                    <li><a class="nav-items" href="news.php">News</a></li>
-                    <li><a class="nav-items" href="login.php">Login</a></li>
+                <ul class="navbar-ul">
+                    <li class="navbar-li"><a class="nav-items" href="index.php">Home</a></li>
+                    <li class="navbar-li"><a class="nav-items" href="index.php#team">The Team</a></li>
+                    <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #latest-news">News</a></li>
+                    <div id="latest-news" uk-offcanvas="mode: push; overlay: true">
+                        <div class="uk-offcanvas-bar">
+                            <button class="uk-offcanvas-close" type="button" uk-close></button>
+                            <h3>$newsTitle</h3>
+                            <p>Some random bullshit ble ble ble ble</p>
+                        </div>
+                    </div>
+                    <li class="navbar-li"><a class="nav-items" href="login.php">Login</a></li>
                 </ul>
             </div>
         </nav>
-        <img class="banner" src="img/banner_header.png" alt="banner image">
-        <section class="section-homepage">
-            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                <li><a href="#">Flop</a></li>
-                <li><a href="#">Aspect</a></li>
-                <li><a href="#">Random1</a></li>
+        <img class="banner loading" src="img/banner_header.png" alt="banner image">
+        <section id="team" class="first-section">
+            <ul uk-tab>
+                <li><a class="first-section-font" href="#">Flop</a></li>
+                <li><a class="first-section-font" href="#">Aspect</a></li>
+                <li><a class="first-section-font" href="#">Random1</a></li>
             </ul>
 
             <ul class="uk-switcher uk-margin">

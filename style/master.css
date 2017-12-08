@@ -1,3 +1,4 @@
+/*------- Global ------*/
 * {
     margin: 0;
     padding: 0;
@@ -9,16 +10,21 @@
 }
 
 html {
-    background: rgba(255, 0, 0, 0.0);
+    background: grey!important;
     overflow-x: hidden;
 }
 
 body {
     font-family: 'BrookLyn';
-    background: grey;
 }
 
+
+
 /*----- Navbar ------*/
+a {
+    
+}
+
 .mainWrapper {
     width: 110%;
     height: 125px;
@@ -37,23 +43,30 @@ body {
     box-shadow: 10px 10px 10px grey!important;
 }
 
-ul {
+.navbar-ul {
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 75px;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-li {
+.navbar-li {
     padding: 100px;
     display: inline;
 }
 /*---------- End Navbar ------------*/
 
-/*.section-homepage {
-    margin: 10vh 5vw 0vh 5vw;
-}*/
+/*----- First Section ------*/
+.first-section {
+    margin: 0 15vw;
+}
+
+.first-section-font {
+    font-size: 20px!important;
+    color: white;
+    border-color: #1f1c2c;
+}
 
 .banner {
     width: 100%;
