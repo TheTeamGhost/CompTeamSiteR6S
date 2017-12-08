@@ -62,7 +62,7 @@
                 </li>
                 <li>
                     <article class="uk-article">
-                        <img class="uk-align-right profile-pic" src="img/dummy-profile.png" alt="">
+                        <img class="uk-align-right profile-pic" src="img/profiles/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
@@ -75,7 +75,7 @@
                 </li>
                 <li>
                     <article class="uk-article">
-                        <img class="uk-align-right profile-pic" src="img/dummy-profile.png" alt="">
+                        <img class="uk-align-right profile-pic" src="img/profiles/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
