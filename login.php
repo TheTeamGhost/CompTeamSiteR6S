@@ -16,7 +16,7 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
      </head>
      <body>
-          <section class="mid">
+          <section class="mid-section">
                <ul uk-accordion>
                     <li class="uk-open">
                          <h3 class="uk-accordion-title">Login</h3>

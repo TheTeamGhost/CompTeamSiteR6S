@@ -43,39 +43,45 @@
             <ul class="uk-switcher uk-margin">
                 <li>
                     <article class="uk-article">
-                        <img src="img/dummy-profile.png" alt="">
+                        <img class="uk-align-right profile-pic" src="img/profiles/flop_steam.jpg" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">Flop</a></h1>
                         <p class="uk-text-lead">Everybody do the Flop</p>
                         <p>My name is Liam, Also known as Flop</p>
                         <div class="uk-grid-small uk-child-width-auto" uk-grid>
                             <div>
-                                <a class="uk-button uk-button-text" href="#">Goto profile</a>
+                                <a class="uk-button uk-button-text" href="#">Site profile</a>
+                            </div>
+                        </div>
+                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                            <div>
+                                <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/76561198296219146" target="_blank">Steam profile</a>
+                                <!--get steam link with php, http://steamcommunity.com/profiles/$steamid  $steamid staat in database -->
                             </div>
                         </div>
                     </article>
                 </li>
                 <li>
                     <article class="uk-article">
-                        <img src="img/dummy-profile.png" alt="">
+                        <img class="uk-align-right profile-pic" src="img/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
                         <div class="uk-grid-small uk-child-width-auto" uk-grid>
                             <div>
-                                <a class="uk-button uk-button-text" href="#">Goto profile</a>
+                                <a class="uk-button uk-button-text" href="#">Site profile</a>
                             </div>
                         </div>
                     </article>
                 </li>
                 <li>
                     <article class="uk-article">
-                        <img src="img/dummy-profile.png" alt="">
+                        <img class="uk-align-right profile-pic" src="img/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
                         <div class="uk-grid-small uk-child-width-auto" uk-grid>
                             <div>
-                                <a class="uk-button uk-button-text" href="#">Goto profile</a>
+                                <a class="uk-button uk-button-text" href="#">Site profile</a>
                             </div>
                         </div>
                     </article>
