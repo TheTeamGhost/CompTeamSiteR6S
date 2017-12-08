@@ -30,6 +30,8 @@ body {
 }
 
 .mainWrapperFlat {
+    top: 0;
+    position: fixed!important;
     width: 100%!important;
     height: 75px!important;
     box-shadow: 10px 10px 10px grey!important;
@@ -46,7 +48,11 @@ ul {
 li {
     padding: 100px;
     display: inline;
-    transform: rotate(5deg)
+}
+/*---------- End Navbar ------------*/
+
+.section-homepage {
+    margin: 10vh 5vw 0vh 5vw;
 }
 
 .banner {
@@ -59,8 +65,4 @@ li {
     text-decoration: none;
     transform: rotate(5deg);
     position: absolute;
-}
-
-.scale:hover {
-     transform: scale(1.03,1.03);
 }

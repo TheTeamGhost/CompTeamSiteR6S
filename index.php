@@ -15,7 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
     </head>
     <body>
-        <nav>
+        <nav class="navbar">
             <div class="mainWrapper">
                 <ul>
                     <li><a class="nav-items" href="index.php">Home</a></li>
@@ -26,7 +26,7 @@
             </div>
         </nav>
         <img class="banner" src="img/banner_header.png" alt="banner image">
-        <section>
+        <section class="section-homepage">
             <ul uk-tab>
                 <li><a href="#">Flop</a></li>
                 <li><a href="#">Aspect</a></li>
