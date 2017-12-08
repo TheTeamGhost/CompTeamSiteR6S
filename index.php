@@ -27,7 +27,7 @@
         </nav>
         <img class="banner" src="img/banner_header.png" alt="banner image">
         <section class="section-homepage">
-            <ul uk-tab>
+            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                 <li><a href="#">Flop</a></li>
                 <li><a href="#">Aspect</a></li>
                 <li><a href="#">Random1</a></li>
@@ -37,8 +37,8 @@
                 <li>
                     <article class="uk-article">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">Flop</a></h1>
-                        <p class="uk-text-lead">$shorttext</p>
-                        <p>$biotext</p>
+                        <p class="uk-text-lead">Everybody do the Flop</p>
+                        <p>My name is Liam, Also known as Flop</p>
                         <div class="uk-grid-small uk-child-width-auto" uk-grid>
                             <div>
                                 <a class="uk-button uk-button-text" href="#">Goto profile</a>
