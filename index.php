@@ -43,6 +43,7 @@
             <ul class="uk-switcher uk-margin">
                 <li>
                     <article class="uk-article">
+                        <img src="img/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">Flop</a></h1>
                         <p class="uk-text-lead">Everybody do the Flop</p>
                         <p>My name is Liam, Also known as Flop</p>
@@ -55,6 +56,7 @@
                 </li>
                 <li>
                     <article class="uk-article">
+                        <img src="img/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
@@ -67,6 +69,7 @@
                 </li>
                 <li>
                     <article class="uk-article">
+                        <img src="img/dummy-profile.png" alt="">
                         <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
