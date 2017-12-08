@@ -6,6 +6,7 @@
         <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="style/master.css">
+        <script type="text/javascript" src="js/rotate-nav.js"></script>
         <!-- UIkit CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
 
@@ -35,7 +36,7 @@
             <ul class="uk-switcher uk-margin">
                 <li>
                     <article class="uk-article">
-                        <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$username</a></h1>
+                        <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">Flop</a></h1>
                         <p class="uk-text-lead">$shorttext</p>
                         <p>$biotext</p>
                         <div class="uk-grid-small uk-child-width-auto" uk-grid>
