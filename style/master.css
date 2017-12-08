@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'BrookLyn';
+    src: url(The_Brooklyn_Bold.otf);
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'BrookLyn';
+    background: grey;
+}
+
+/*----- Navbar ------*/
+.mainWrapper {
+    width: 110%;
+    height: 125px;
+    background: -webkit-linear-gradient(to right, #1f1c2c, #928dab); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1f1c2c, #928dab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    transform: rotate(-5deg);
+    left: -5%;
+    position: absolute;
+}
+
+.mainWrapperFlat {
+    width: 100%!important;
+    height: 75px!important;
+    box-shadow: 10px 10px 10px grey!important;
+}
+
+ul {
+    position: absolute;
+    top: 45%;
+    left: 75px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    padding: 100px;
+    display: inline;
+    transform: rotate(5deg)
+}
+
+.banner {
+    width: 100%;
+}
+
+.nav-items {
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+    transform: rotate(5deg);
+    position: absolute;
+}
+
+.scale:hover {
+    transform: scale(1.01);
+}
