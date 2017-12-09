@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <?php
-                        if (isset($_COOKIE[$userid])) {
+                        if (isset($_COOKIE['userid'])) {
                             $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id='$userid'");
                             echo
                             '
@@ -58,10 +58,11 @@
                             ';
                         }
                         elseif (isset($_SESSION['id'])) {
+                            $fetchusername_session = $conn->query("SELECT username FROM users WHERE id='$userid'");
                             echo
                             '
                                 <li>
-                                    <a href="#">Welcome back '.$username_cookie['username'].' (Signed in through SESSION)</a>
+                                    <a href="#">Welcome back '.$username_session['username'].' (Signed in through SESSION)</a>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                             <li><a href="#">Profile</a></li>
