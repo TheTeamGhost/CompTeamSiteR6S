@@ -3,13 +3,13 @@ function checkPasswordMatch() {
     var confirmPassword = $("#ConfirmPassword").val();
 
     if (password != confirmPassword) {
-    	$("#CheckPasswordMatch").html("Passwords do not match! Ples fix?!");
+    	$("#CheckPasswordMatch").html("Passwords do not match! Ples fix?!<br>");
         $("#infoBox").addClass("uk-alert-danger")
         $("#infoBox").removeClass("hidden")
         $("#infoBox").removeClass("uk-alert-success")
     }
     else {
-        $("#CheckPasswordMatch").html("Passwords match.");
+        $("#CheckPasswordMatch").html("Passwords match.<br>");
         $("#infoBox").addClass("uk-alert-succes")
         $("#infoBox").removeClass("hidden")
         $("#infoBox").removeClass("uk-alert-danger")

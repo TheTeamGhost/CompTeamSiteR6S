@@ -27,9 +27,35 @@
           <section class="mid-section">
                <ul uk-accordion>
                     <li class="uk-open">
+                        <?php
+                            // define variables and set to empty values
+                            $usernameErr = $passwordErr ="";
+                            $name = $password = "";
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                              if (empty($_POST["username"])) {
+                                $usernameErr = "Please fill in a username!<br>";
+                              } else {
+                                $name = url_input($_POST["username"]);
+                              }
+
+                              if (empty($_POST["email"])) {
+                                $passwordErr = "Please fill in a password!<br>";
+                              } else {
+                                $password = url_input($_POST["password"]);
+                              }
+                            }
+
+                            function url_input($data) {
+                              $data = trim($data);
+                              $data = stripslashes($data);
+                              $data = htmlspecialchars($data);
+                              return $data;
+                            }
+                        ?>
                          <h3 class="uk-accordion-title">Login</h3>
                          <div class="uk-accordion-content">
-                              <form action="inc/login/login.php" method="get">
+                              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                    <div class="uk-margin">
                                         <div class="uk-inline">
                                              <span class="uk-form-icon" uk-icon="icon: user"></span>
@@ -42,6 +68,20 @@
                                              <input name="password" class="uk-input" type="password">
                                         </div>
                                    </div>
+                                   <?php
+                                       if (!empty($usernameErr) || !empty($passwordErr)) {
+                                           echo
+                                           '
+                                               <div class="smooth infoBox uk-alert-danger" uk-alert>
+                                                   <p>';
+                                           echo $usernameErr, $passwordErr;
+                                           echo
+                                           '
+                                                   </p>
+                                               </div>
+                                           ';
+                                       }
+                                   ?>
                                    <div class="uk-margin">
                                         <label><input name="rememberMe" class="uk-checkbox" type="checkbox" value="true"> Remember Me</label>
                                    </div>
@@ -50,15 +90,41 @@
                          </div>
                     </li>
                     <li>
+                        <?php
+                            // define variables and set to empty values
+                            $nameErr = $emailErr ="";
+                            $username = $email = "";
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                              if (empty($_POST["username"])) {
+                                $nameErr = "UserName is required!<br>";
+                              } else {
+                                $username = url2_input($_POST["name"]);
+                              }
+
+                              if (empty($_POST["email"])) {
+                                $emailErr = "Email is required!<br>";
+                              } else {
+                                $email = url2_input($_POST["email"]);
+                              }
+                            }
+
+                            function url2_input($data) {
+                              $data = trim($data);
+                              $data = stripslashes($data);
+                              $data = htmlspecialchars($data);
+                              return $data;
+                            }
+                        ?>
                          <h3 class="uk-accordion-title">Sign Up</h3>
                          <div class="uk-accordion-content">
-                              <form action="inc/login/register.php" method="get">
+                              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                    <fieldset class="uk-fieldset">
                                         <div class="uk-margin">
-                                             <input name="username" class="uk-input" required="required" type="text" placeholder="Username">
+                                             <input name="username" class="uk-input" type="text" placeholder="Username">
                                         </div>
                                         <div class="uk-margin-medium">
-                                             <input name="email" class="uk-input" required="required" type="text" placeholder="e-mail">
+                                             <input name="email" class="uk-input" type="text" placeholder="e-mail">
                                         </div>
                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                              <p class="uk-margin-right">Password:</p>
@@ -69,6 +135,20 @@
                                         <div id="infoBox" class="hidden smooth infoBox" uk-alert>
                                             <p id="CheckPasswordMatch"></p>
                                         </div>
+                                        <?php
+                                            if (!empty($nameErr) || !empty($emailErr)) {
+                                                echo
+                                                '
+                                                    <div class="smooth infoBox uk-alert-danger" uk-alert>
+                                                        <p>';
+                                                echo $nameErr, $emailErr;
+                                                echo
+                                                '
+                                                        </p>
+                                                    </div>
+                                                ';
+                                            }
+                                        ?>
                                         <button type="submit" class="uk-button uk-button-text scale"> Submit </button>
                                    </fieldset>
                               </form>
