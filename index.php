@@ -42,8 +42,8 @@
         <section id="team" class="first-section">
             <ul uk-tab>
                 <?php
-                    if ($active_user) {
-                        echo "<li><a class='first-section-font' href='#'>Become a Member</a></li>";
+                    if ($active_user = 1) {
+                        echo '<li><a class="first-section-font" href="#">'.$username.'</a></li>';
                     }
                 ?>
                 <li><a class="first-section-font" href="#">Become a Member</a></li>
@@ -51,49 +51,30 @@
 
             <ul class="uk-switcher uk-margin">
                 <?php
-                    if ($active_user) {
+                    if ($user_active = 1) {
                         echo
-                        "
+                        '
                         <li>
-                            <article class='uk-article'>
-                                <img class='uk-align-right profile-pic' src='img/profiles/$userinfo['profile-pic_filename']' alt=''>
-                                <h1 class='uk-article-title'><a class='uk-link-reset' href='#'>$userinfo['username']</a></h1>
-                                <p class='uk-text-lead'>$userinfo['quote']</p>
-                                <p>$userinfo['bio']</p>
-                                <div class='uk-grid-small uk-child-width-auto' uk-grid>
+                            <article class="uk-article">
+                                <img class="uk-align-right profile-pic" src="img/profiles/'.$profile_img.'" alt="">
+                                <h1 class="uk-article-title"><a class="uk-link-reset" href="#">'.$username.'</a></h1>
+                                <p class="uk-text-lead">'.$quote.'</p>
+                                <p>'.$bio.'</p>
+                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class='uk-button uk-button-text' href=''>Site profile (in the works)</a><!--Will be added later on -->
+                                        <a class="uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
                                     </div>
                                 </div>
-                                <div class='uk-grid-small uk-child-width-auto' uk-grid>
+                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class='uk-button uk-button-text' href='http://steamcommunity.com/profiles/$userinfo['steamid']' target='_blank'>Steam profile</a>
+                                        <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$steamid.'" target="_blank">Steam profile</a>
                                     </div>
                                 </div>
                             </article>
                         </li>
-                        ";
+                        ';
                     }
                 ?>
-                <li>
-                    <article class="uk-article">
-                        <img class="uk-align-right profile-pic" src="img/profiles/$user_profile_pic" alt="">
-                        <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">$user_name</a></h1>
-                        <p class="uk-text-lead">$quote</p>
-                        <p>$bio</p>
-                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
-                            <div>
-                                <a class="uk-button uk-button-text" href="#">Site profile (in the works)</a><!--Will be added later on -->
-                            </div>
-                        </div>
-                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
-                            <div>
-                                <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/$steamid" target="_blank">Steam profile</a>
-                                <!--get steam link with php, http://steamcommunity.com/profiles/$steamid  $steamid staat in database -->
-                            </div>
-                        </div>
-                    </article>
-                </li>
                 <li>
                     <article class="uk-article">
                         <img class="uk-align-right profile-pic" src="img/profiles/$user_profile_pic" alt="">
