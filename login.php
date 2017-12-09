@@ -14,6 +14,10 @@
           <!-- UIkit JS -->
           <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+          <!-- JQuery -->
+          <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+          <script type='text/javascript' src="js/check-password.js"></script>
      </head>
      <body>
           <section class="mid-section">
@@ -43,30 +47,23 @@
                     <li>
                          <h3 class="uk-accordion-title">Sign Up</h3>
                          <div class="uk-accordion-content">
-                              <form>
+                              <form action="inc/login/register.php">
                                    <fieldset class="uk-fieldset">
                                         <div class="uk-margin">
-                                             <input class="uk-input" required="required" type="text" placeholder="Username">
+                                             <input name="username" class="uk-input" required="required" type="text" placeholder="Username">
                                         </div>
                                         <div class="uk-margin-medium">
-                                             <input class="uk-input" required="required" type="text" placeholder="e-mail">
+                                             <input name="email" class="uk-input" required="required" type="text" placeholder="e-mail">
                                         </div>
                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                              <p class="uk-margin-right">Password:</p>
-                                             <input id="password" class="uk-input" required="required" type="password" placeholder="Password">
+                                             <input name="password" id="Password" class="uk-input" type="password" placeholder="Password">
                                              <p class="uk-margin-right">Confirm Password:</p>
-                                             <input class="uk-input" required="required" type="password" placeholder="Confirm Password" oninput="check(this)">
+                                             <input class="uk-input" id="ConfirmPassword" type="password" placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                         </div>
-                                        <script language='javascript' type='text/javascript'>
-                                            function check(input) {
-                                                if (input.value != document.getElementById('password').value) {
-                                                    input.setCustomValidity('Password does not match!');
-                                                } else {
-                                                    // input is valid -- reset the error message
-                                                    input.setCustomValidity('');
-                                                }
-                                            }
-                                        </script>
+                                        <div id="infoBox" class="hidden smooth" uk-alert>
+                                            <p id="CheckPasswordMatch"></p>
+                                        </div>
                                         <button type="button" name="submit" class="uk-button uk-button-text scale"> Submit </button>
                                    </fieldset>
                               </form>

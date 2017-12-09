@@ -18,6 +18,8 @@
         <!-- UIkit JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     </head>
     <body>
         <nav>
@@ -28,7 +30,6 @@
                     <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #latest-news">News</a></li>
                     <div id="latest-news" uk-offcanvas="mode: push; overlay: true">
                         <div class="uk-offcanvas-bar">
-                            <button class="uk-offcanvas-close" type="button" uk-close></button>
                             <h3>$news_title</h3>
                             <p>$news_text</p>
                             <div class="uk-card-badge uk-label">$news_date</div>
@@ -96,7 +97,7 @@
                 <li>
                     <article class="uk-article">
                         <img class="uk-align-right profile-pic" src="img/profiles/$user_profile_pic" alt="">
-                        <h1 class="uk-article-title"><a class="uk-link-reset" href="$userprofile">Become a Member</a></h1>
+                        <h1 class="uk-article-title"><a class="uk-link-reset" href="login.php">Become a Member</a></h1>
                         <p class="uk-text-lead">Comming soon...</p>
                     </article>
                 </li>

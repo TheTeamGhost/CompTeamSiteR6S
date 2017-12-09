@@ -21,6 +21,12 @@ body {
 .banner {
     width: 100%;
 }
+input {
+    border-radius: 3px!important;
+}
+.smooth {
+    border-radius: 3px;
+}
 
 /*----- Navbar ------*/
 a {
@@ -76,6 +82,9 @@ a {
 
 
 /*------- Login php -------*/
+.hidden {
+    display: none;
+}
 .mid-section {
     margin: 15vh;
 }
