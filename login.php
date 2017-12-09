@@ -25,7 +25,7 @@
                     <li class="uk-open">
                          <h3 class="uk-accordion-title">Login</h3>
                          <div class="uk-accordion-content">
-                              <form action="inc/login/login.php" method="post ">
+                              <form action="inc/login/login.php" method="get">
                                    <div class="uk-margin">
                                         <div class="uk-inline">
                                              <span class="uk-form-icon" uk-icon="icon: user"></span>
@@ -48,7 +48,7 @@
                     <li>
                          <h3 class="uk-accordion-title">Sign Up</h3>
                          <div class="uk-accordion-content">
-                              <form action="inc/login/register.php">
+                              <form action="inc/login/register.php" method="get">
                                    <fieldset class="uk-fieldset">
                                         <div class="uk-margin">
                                              <input name="username" class="uk-input" required="required" type="text" placeholder="Username">

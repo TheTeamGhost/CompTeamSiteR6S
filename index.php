@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    require 'inc/steamauth/steamauth.php';
     require 'inc/db_connect.php';
     include 'inc/profile_handler.php';
     include 'inc/getnews.php';

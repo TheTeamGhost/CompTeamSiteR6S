@@ -1,7 +1,7 @@
 <?php
 include '../db_connect.php';
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = $_GET['username'];
+$password = $_GET['password'];
 
 if(isset($username, $password))
     {
