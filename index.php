@@ -43,7 +43,7 @@
             <ul uk-tab>
                 <?php
                     if ($active_user) {
-                        echo "<li><a class='first-section-font' href='#'>$userinfo['username']</a></li>";
+                        echo "<li><a class='first-section-font' href='#'>Become a Member</a></li>";
                     }
                 ?>
                 <li><a class="first-section-font" href="#">Become a Member</a></li>
