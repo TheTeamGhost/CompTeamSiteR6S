@@ -34,7 +34,17 @@
                             <div class="uk-card-badge uk-label">$news_date</div>
                         </div>
                     </div>
-                    <li class="navbar-li"><a class="nav-items" href="login.php">Login</a></li>
+                    <?php
+                        if (isset($userid)) {
+                            echo
+                            '
+
+                            ';
+                        }
+                        else {
+                            echo '<li class="navbar-li"><a class="nav-items" href="login.php">Login</a></li>';
+                        }
+                    ?>
                 </ul>
             </div>
         </nav>
