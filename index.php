@@ -37,8 +37,7 @@
                     </div>
                     <?php
                         if (isset($_COOKIE[$userid])) {
-                            $getusername_cookie = "SELECT username FROM users WHERE id='$userid'";
-                            $fetchusername_cookie = $conn->query($getusername_cookie);
+                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id='$userid'");
                             echo
                             '
                                 <li>
@@ -89,8 +88,7 @@
         <section id="team" class="first-section">
             <ul uk-tab="animation: uk-animation-slide-left, uk-animation-slide-right">
                 <?php
-                    $getusername = 'SELECT username FROM users WHERE active="1"';
-                    $fetch_username = $conn->query($getusername);
+                    $fetch_username = $conn->query('SELECT username FROM users WHERE active="1"');
                     while ($parsed_username =  $fetch_username->fetch_assoc()) {
                         echo '<li><a class="first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
                     }
@@ -100,8 +98,7 @@
 
             <ul class="uk-switcher uk-margin">
                 <?php
-                    $getuserinfo = 'SELECT username, quote, bio, steamid, profile_img FROM users WHERE active="1"';
-                    $fetch_userinfo2 = $conn->query($getuserinfo);
+                    $fetch_userinfo2 = $conn->query('SELECT username, quote, bio, steamid, profile_img FROM users WHERE active="1"');
                     while ($parsed_userinfo2 =  $fetch_userinfo2->fetch_assoc()) {
                         echo
                         '
