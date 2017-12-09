@@ -39,11 +39,12 @@
                     </div>
                     <?php
                         if (isset($_COOKIE['userid'])) {
-                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id='$userid'");
+                            $userid = $_COOKIE['userid'];
+                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id=$userid");
                             echo
                             '
                                 <li>
-                                    <a href="#">Welcome back '.$username_cookie['username'].'(Signed in through COOKIE)</a>
+                                    <a href="#">Welcome back '.$fetchusername_cookie['username'].'(Signed in through COOKIE)</a>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                             <li><a href="#">Profile</a></li>
@@ -75,6 +76,29 @@
                             }
                             echo
                             '
+                                        </ul>
+                                    </div>
+                                </li>
+                            ';
+                        }
+                        elseif (isset($steamprofile['steamid'])) {
+                            $id = $steamprofile['steamid'];
+                            $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='{$id}'");
+                            echo
+                            '
+                                <li>
+                                    <a href="#">Welcome back '.$fetchusername_session_steam['username'].' (Signed in through SESSION Steam)</a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="#">Profile</a></li>
+                                            <li><a href="#">Settings</a></li>
+                            ';
+                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                            <li><a href="?logout">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
