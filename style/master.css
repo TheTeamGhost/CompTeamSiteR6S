@@ -82,6 +82,9 @@ a {
 
 
 /*------- Login php -------*/
+.infoBox {
+    margin: 35px 60vw 35px 0;
+}
 .hidden {
     display: none;
 }

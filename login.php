@@ -25,22 +25,23 @@
                     <li class="uk-open">
                          <h3 class="uk-accordion-title">Login</h3>
                          <div class="uk-accordion-content">
-                              <form>
+                              <form action="inc/login/login.php" method="post ">
                                    <div class="uk-margin">
                                         <div class="uk-inline">
                                              <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                             <input class="uk-input" type="text">
+                                             <input name="username" class="uk-input" type="text">
                                         </div>
                                    </div>
                                    <div class="uk-margin">
                                         <div class="uk-inline">
                                              <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                                             <input class="uk-input" type="password">
+                                             <input name="password" class="uk-input" type="password">
                                         </div>
                                    </div>
                                    <div class="uk-margin">
-                                        <label><input class="uk-checkbox" type="checkbox"> Remember Me</label>
+                                        <label><input name="rememberMe" class="uk-checkbox" type="checkbox" value="true"> Remember Me</label>
                                    </div>
+                                   <button type="submit" class="uk-button uk-button-text scale"> Submit </button>
                               </form>
                          </div>
                     </li>
@@ -61,10 +62,10 @@
                                              <p class="uk-margin-right">Confirm Password:</p>
                                              <input class="uk-input" id="ConfirmPassword" type="password" placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                         </div>
-                                        <div id="infoBox" class="hidden smooth" uk-alert>
+                                        <div id="infoBox" class="hidden smooth infoBox" uk-alert>
                                             <p id="CheckPasswordMatch"></p>
                                         </div>
-                                        <button type="button" name="submit" class="uk-button uk-button-text scale"> Submit </button>
+                                        <button type="submit" class="uk-button uk-button-text scale"> Submit </button>
                                    </fieldset>
                               </form>
                          </div>

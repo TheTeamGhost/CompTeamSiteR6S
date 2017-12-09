@@ -36,10 +36,46 @@
                         </div>
                     </div>
                     <?php
-                        if (isset($userid)) {
+                        if (isset($_COOKIE[$userid])) {
+                            $getusername_cookie = "SELECT username FROM users WHERE id='$userid'";
+                            $fetchusername_cookie = $conn->query($getusername_cookie);
                             echo
                             '
-                                //todo
+                                <li>
+                                    <a href="#">Welcome back '.$username_cookie['username'].'(Signed in through COOKIE)</a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="#">Profile</a></li>
+                                            <li><a href="#">Settings</a></li>
+                            ';
+                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                        </ul>
+                                    </div>
+                                </li>
+                            ';
+                        }
+                        elseif (isset($_SESSION['id'])) {
+                            echo
+                            '
+                                <li>
+                                    <a href="#">Welcome back '.$username_cookie['username'].' (Signed in through SESSION)</a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="#">Profile</a></li>
+                                            <li><a href="#">Settings</a></li>
+                            ';
+                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                        </ul>
+                                    </div>
+                                </li>
                             ';
                         }
                         else {
