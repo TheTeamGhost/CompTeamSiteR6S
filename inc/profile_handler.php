@@ -10,4 +10,8 @@
         $user_active = $parsed_userinfo["active"];
         $profile_img = $parsed_userinfo["profile_img"];
     }
+
+    //Statistics
+    $fetch_amount_active = "SELECT COUNT(active) FROM users";
+    $amount_active = $conn->query($fetch_amount_active)
 ?>

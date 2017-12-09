@@ -50,10 +50,14 @@
         </nav>
         <img class="banner loading" src="img/banner_header.png" alt="banner image">
         <section id="team" class="first-section">
-            <ul uk-tab>
+            <ul uk-tab="animation: uk-animation-slide-left, uk-animation-slide-right">
                 <?php
-                    if ($active_user = 1) {
-                        echo '<li><a class="first-section-font" href="#">'.$username.'</a></li>';
+                    if ($user_active = 1) {
+                        $getusername = "SELECT username FROM users";
+                        $fetch_username = $conn->query($getusername);
+                        while ($parsed_username =  $fetch_username->fetch_assoc()) {
+                            echo '<li><a class="first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
+                        }
                     }
                 ?>
                 <li><a class="first-section-font" href="#">Become a Member</a></li>
@@ -62,27 +66,31 @@
             <ul class="uk-switcher uk-margin">
                 <?php
                     if ($user_active = 1) {
-                        echo
-                        '
-                        <li>
-                            <article class="uk-article">
-                                <img class="uk-align-right profile-pic" src="img/profiles/'.$profile_img.'" alt="">
-                                <h1 class="uk-article-title"><a class="uk-link-reset" href="#">'.$username.'</a></h1>
-                                <p class="uk-text-lead">'.$quote.'</p>
-                                <p>'.$bio.'</p>
-                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
-                                    <div>
-                                        <a class="uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
+                        $getuserinfo = "SELECT username, quote, bio, steamid, profile_img FROM users";
+                        $fetch_userinfo2 = $conn->query($getuserinfo);
+                        while ($parsed_userinfo2 =  $fetch_userinfo2->fetch_assoc()) {
+                            echo
+                            '
+                            <li>
+                                <article class="uk-article">
+                                    <img class="uk-align-right profile-pic" src="img/profiles/'.$parsed_userinfo2['profile_img'].'" alt="">
+                                    <h1 class="uk-article-title"><a class="uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
+                                    <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
+                                    <p>'.$parsed_userinfo2['bio'].'</p>
+                                    <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                                        <div>
+                                            <a class="uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
-                                    <div>
-                                        <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$steamid.'" target="_blank">Steam profile</a>
+                                    <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                                        <div>
+                                            <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$parsed_userinfo2['steamid'].'" target="_blank">Steam profile</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        </li>
-                        ';
+                                </article>
+                            </li>
+                            ';
+                        }
                     }
                 ?>
                 <li>
