@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require 'inc/steamauth/steamauth.php';
+?>
 <!DOCTYPE html>
 <html>
      <head>
@@ -68,6 +72,12 @@
                                         <button type="submit" class="uk-button uk-button-text scale"> Submit </button>
                                    </fieldset>
                               </form>
+                         </div>
+                    </li>
+                    <li>
+                         <h3 class="uk-accordion-title">Steam Login</h3>
+                         <div class="uk-accordion-content">
+                              <a href="?login">Click here</a>
                          </div>
                     </li>
                </ul>
