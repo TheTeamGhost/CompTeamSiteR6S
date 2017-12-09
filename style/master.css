@@ -28,20 +28,19 @@ a {
 }
 
 .mainWrapper {
-    width: 110%;
-    height: 125px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
     background: -webkit-linear-gradient(to right, #1f1c2c, #928dab); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #1f1c2c, #928dab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    transform: rotate(-5deg);
-    left: -5%;
-    position: absolute;
 }
-.mainWrapperFlat {
-    top: 0;
-    position: fixed!important;
-    width: 100%!important;
-    height: 75px!important;
-    box-shadow: 10px 10px 10px grey!important;
+.tilted-nav {
+    position: absolute!important;
+    left: -5%;
+    width: 110%!important;
+    transform: rotate(-5deg);
+    height: 125px!important;
 }
 .navbar-ul {
     position: absolute;

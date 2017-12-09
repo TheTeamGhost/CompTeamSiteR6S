@@ -3,9 +3,9 @@ $(document).ready(function () {
     $(document).scroll(function () {
         scroll_pos = $(this).scrollTop();
         if (scroll_pos > 100) {
-            $(".navbar").removeClass("mainWrapperFlat")
+            $(".mainWrapper").removeClass("tilted-nav")
         } else {
-            $(".navbar").addClass("mainWrapperFlat")
+            $(".mainWrapper").addClass("tilted-nav")
         }
     });
 });

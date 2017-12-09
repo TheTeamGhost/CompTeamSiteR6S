@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
     </head>
     <body>
-        <nav class="navbar">
+        <nav>
             <div class="mainWrapper">
                 <ul class="navbar-ul">
                     <li class="navbar-li"><a class="nav-items" href="index.php">Home</a></li>
@@ -38,7 +38,7 @@
                         if (isset($userid)) {
                             echo
                             '
-
+                                //todo
                             ';
                         }
                         else {
