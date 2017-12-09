@@ -4,4 +4,5 @@
     $bio = 'SELECT bio FROM users'
     $steamid = 'SELECT steamid FROM users'
     $user_profile_pic = 'SELECT profile-pic_filename FROM users'
+    $active_user = 'SELECT active FROM users'
 ?>
