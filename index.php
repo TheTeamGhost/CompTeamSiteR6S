@@ -43,7 +43,7 @@
             <ul uk-tab>
                 <?php
                     if ($active_user) {
-                        echo "<li><a class="first-section-font" href="">$userinfo['username']</a></li>";
+                        echo "<li><a class='first-section-font' href='#'>$userinfo['username']</a></li>";
                     }
                 ?>
                 <li><a class="first-section-font" href="#">Become a Member</a></li>
@@ -55,19 +55,19 @@
                         echo
                         "
                         <li>
-                            <article class="uk-article">
-                                <img class="uk-align-right profile-pic" src="img/profiles/$userinfo['profile-pic_filename']" alt="">
-                                <h1 class="uk-article-title"><a class="uk-link-reset" href="index.php">$userinfo['username']</a></h1>
-                                <p class="uk-text-lead">$userinfo['quote']</p>
+                            <article class='uk-article'>
+                                <img class='uk-align-right profile-pic' src='img/profiles/$userinfo['profile-pic_filename']' alt=''>
+                                <h1 class='uk-article-title'><a class='uk-link-reset' href='#'>$userinfo['username']</a></h1>
+                                <p class='uk-text-lead'>$userinfo['quote']</p>
                                 <p>$userinfo['bio']</p>
-                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                                <div class='uk-grid-small uk-child-width-auto' uk-grid>
                                     <div>
-                                        <a class="uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
+                                        <a class='uk-button uk-button-text' href=''>Site profile (in the works)</a><!--Will be added later on -->
                                     </div>
                                 </div>
-                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                                <div class='uk-grid-small uk-child-width-auto' uk-grid>
                                     <div>
-                                        <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/$userinfo['steamid']" target="_blank">Steam profile</a>
+                                        <a class='uk-button uk-button-text' href='http://steamcommunity.com/profiles/$userinfo['steamid']' target='_blank'>Steam profile</a>
                                     </div>
                                 </div>
                             </article>
