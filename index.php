@@ -7,7 +7,7 @@
     include 'inc/getnews.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html class="bg-grey">
     <head>
         <meta charset="utf-8">
         <title>Join the Team</title>
@@ -28,9 +28,9 @@
         <nav>
             <div class="mainWrapper">
                 <ul class="navbar-ul">
-                    <li class="navbar-li"><a class="nav-items" href="index.php">Home</a></li>
-                    <li class="navbar-li"><a class="nav-items" href="index.php#team">The Team</a></li>
-                    <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #latest-news">News</a></li>
+                    <li class="navbar-li"><a class="anchor nav-items" href="index.php">Home</a></li>
+                    <li class="navbar-li"><a class="anchor nav-items" href="index.php#team">The Team</a></li>
+                    <li class="navbar-li"><a class="anchor nav-items" href="#" uk-toggle="target: #latest-news">News</a></li>
                     <div id="latest-news" uk-offcanvas="overlay: true">
                         <div class="uk-offcanvas-bar">
                             <h3>$news_title</h3>
@@ -41,52 +41,54 @@
                     <?php
                         if (isset($_COOKIE['userid'])) {
                             $userid = $_COOKIE['userid'];
-                            $fetchusername_cookie = $conn->query("SELECT username, user_role FROM users WHERE id='".$userid."'");
+                            $fetchusername_cookie = $conn->query("SELECT id, username, user_role FROM users WHERE id='".$userid."'");
                             while ($fetched_userinfo = $fetchusername_cookie->fetch_assoc()) {
                                 $username_cookie = $fetched_userinfo['username'];
-                                $userrole = $fetched_userinf['user_role'];
+                                $userrole = $fetched_userinfo['user_role'];
+                                $userid = $fetched_userinfo['id'];
                             }
                             echo
                             '
-                                <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #userinterface">'.$username_cookie.'</a></li>
+                                <li class="navbar-li"><a class="anchor nav-items" href="#" uk-toggle="target: #userinterface">'.$username_cookie.'</a></li>
                                 <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
                                     <div class="uk-offcanvas-bar">
                                         <div class="uk-card-badge uk-label">'.$username_cookie.'</div>
-                                        <li class="user-li"><a class="user-nav-items" href="#">Profile</a></li>
-                                        <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="#">Settings</a></li>
                             ';
-                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
-                                echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
+                            if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
+                                echo '<li class="user-li"><a class="anchor user-nav-items" href="#">Admin Control Panel</a></li>';
                             }
                             echo
                             '
-                                        <li class="user-li"><a class="user-nav-items" href="?clogout">Logout</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="?clogout">Logout</a></li>
                                     </div>
                                 </div>
                             ';
                         }
                         elseif (isset($_SESSION['id'])) {
                             $userid = $_SESSION['id'];
-                            $fetchusername_session = $conn->query("SELECT username, user_role FROM users WHERE id='".$userid."'");
+                            $fetchusername_session = $conn->query("SELECT id, username, user_role FROM users WHERE id='".$userid."'");
                             while ($fetched_userinfo = $fetchusername_session->fetch_assoc()) {
                                 $username_session = $fetched_userinfo['username'];
-                                $userrole = $fetched_userinf['user_role'];
+                                $userrole = $fetched_userinfo['user_role'];
+                                $userid = $fetched_userinfo['id'];
                             }
                             echo
                             '
-                                <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #userinterface">'.$username_session.'</a></li>
+                                <li class="navbar-li"><a class="anchor nav-items" href="#" uk-toggle="target: #userinterface">'.$username_session.'</a></li>
                                 <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
                                     <div class="uk-offcanvas-bar">
                                         <div class="uk-card-badge uk-label">'.$username_session.'</div>
-                                        <li class="user-li"><a class="user-nav-items" href="#">Profile</a></li>
-                                        <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="#">Settings</a></li>
                             ';
-                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                            if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
                                 echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
                             }
                             echo
                             '
-                                        <li class="user-li"><a class="user-nav-items" href="?slogout">Logout</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="?slogout">Logout</a></li>
                                     </div>
                                 </div>
                             ';
@@ -115,7 +117,7 @@
                             ';
                         }
                         else {
-                            echo '<li class="navbar-li"><a class="nav-items" href="login.php">Login</a></li>';
+                            echo '<li class="navbar-li"><a class="anchor nav-items" href="login.php">Login</a></li>';
                         }
                     ?>
                 </ul>
@@ -127,10 +129,10 @@
                 <?php
                     $fetch_username = $conn->query('SELECT username FROM users WHERE active="1"');
                     while ($parsed_username =  $fetch_username->fetch_assoc()) {
-                        echo '<li class="active-black"><a class="first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
+                        echo '<li class="active-black"><a class="anchor first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
                     }
                 ?>
-                <li><a class="first-section-font" href="#">Become a Member</a></li>
+                <li><a class="anchor first-section-font" href="#">Become a Member</a></li>
             </ul>
 
             <ul class="uk-switcher uk-margin">
@@ -142,17 +144,17 @@
                         <li>
                             <article class="uk-article">
                                 <img class="uk-align-right profile-pic" src="img/profiles/'.$parsed_userinfo2['profile_img'].'" alt="">
-                                <h1 class="uk-article-title"><a class="uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
+                                <h1 class="uk-article-title"><a class="anchor uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
                                 <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
                                 <p>'.$parsed_userinfo2['bio'].'</p>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class="uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
+                                        <a class="anchor uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
                                     </div>
                                 </div>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class="uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$parsed_userinfo2['steamid'].'" target="_blank">Steam profile</a>
+                                        <a class="anchor uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$parsed_userinfo2['steamid'].'" target="_blank">Steam profile</a>
                                     </div>
                                 </div>
                             </article>
@@ -163,7 +165,7 @@
                 <li>
                     <article class="uk-article">
                         <img class="uk-align-right profile-pic" src="img/profiles/$user_profile_pic" alt="">
-                        <h1 class="uk-article-title"><a class="uk-link-reset" href="login.php">Become a Member</a></h1>
+                        <h1 class="uk-article-title"><a class="anchor uk-link-reset" href="login.php">Become a Member</a></h1>
                         <p class="uk-text-lead">Comming soon...</p>
                     </article>
                 </li>

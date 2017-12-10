@@ -10,12 +10,15 @@
 }
 
 html {
-    background: grey!important;
     overflow-x: hidden;
 }
 
 body {
     font-family: 'BrookLyn';
+}
+
+.bg-grey {
+    background: grey!important;
 }
 
 .banner {
@@ -29,11 +32,11 @@ input {
 }
 
 /*----- Navbar ------*/
-a {
+.anchor {
     text-decoration: none;
     color: white!important;
 }
-a:hover {
+.anchor:hover {
     color: white!important;
 }
 .uk-tab > .uk-active > a {
@@ -107,4 +110,11 @@ a:hover {
 }
 .mid-section {
     margin: 15vh;
+}
+
+/*-------- Profile php ---------*/
+.fixed-background {
+    background: -webkit-linear-gradient(to right, #1f1c2c, #928dab)!important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1f1c2c, #928dab)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0px 2px 20px 7px #888888;
 }
