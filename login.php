@@ -1,9 +1,6 @@
 <?php
     require 'inc/steamauth/steamauth.php';
     require 'inc/db_connect.php';
-    if ($redirect) {
-        header('Location: http://liamd.pw/TwisTDevelopment/');
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,11 +68,11 @@
                                     if ($_POST['rememberMe'] == "true") {
                                         $userid = "userid";
                                         setcookie($userid, $fetched_userid, time() + (86400 * 365), "/"); // 86400 = 1 day
-                                        $redirect = True;
+                                        echo "<script> window.location.assign('index.php'); </script>";
                                     }
                                     else {
                                         $_SESSION['id'] = $fetched_userid;
-                                        $redirect = True;
+                                        echo "<script> window.location.assign('index.php'); </script>";
                                     }
                                 }
                                 else {
