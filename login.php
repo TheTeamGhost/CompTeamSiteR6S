@@ -1,6 +1,9 @@
 <?php
     require 'inc/steamauth/steamauth.php';
     require 'inc/db_connect.php';
+    if ($redirect) {
+        header('Location: http://liamd.pw/TwisTDevelopment/');
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,8 +43,8 @@
                                     $loginname = True;
                                 }
 
-                                if (empty($_POST["email"])) {
-                                    $passwordErr = "Please fill in a password!<br>";
+                                if (empty($_POST["password"])) {
+                                    $passwordErr = "Password is required!<br>";
                                 } else {
                                     $password = url_input($_POST["password"]);
                                     $loginpass = True;
@@ -58,13 +61,21 @@
                             if ($loginname && $loginpass) {
                                 $finduser = "SELECT * FROM users WHERE username='".$name."'";
                                 $verifylogin = $conn->query($finduser);
-                                if (password_verify($password, $verifylogin['password'])) {
-                                    echo "Login succes!";
+
+                                while ($parsed_login =  $verifylogin->fetch_assoc()) {
+                                    $fetched_password = $parsed_login["password"];
+                                    $fetched_userid = $parsed_login["id"];
+                                }
+
+                                if (password_verify($password, $fetched_password)) {
                                     if ($_POST['rememberMe'] == "true") {
-                                        //save cookie for 1 year
+                                        $userid = "userid";
+                                        setcookie($userid, $fetched_userid, time() + (86400 * 365), "/"); // 86400 = 1 day
+                                        $redirect = True;
                                     }
                                     else {
-                                        //save just for session
+                                        $_SESSION['id'] = $fetched_userid;
+                                        $redirect = True;
                                     }
                                 }
                                 else {
@@ -138,16 +149,10 @@
                             }
 
                             if ($passSuc && $emailSuc && $unamecheck) {
-                                $rnd_verify_id = rand(53685, 89520)
+                                $rnd_verify_id = mtrand(53685, 89520);
                                 $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
                                 $createuser = "INSERT INTO users (username, password, email, email_verify_id) VALUES ('$username', '$hashed_pass', '".mysqli_real_escape_string($conn, $email)."', $rnd_verify_id)";
                                 $conn->query($createuser) or die($conn->error);
-                                echo "User created";
-                            }
-                            else {
-                                echo "Failed to create user";
-                                echo "p", $passSuc, "e", $emailSuc, "u", $unamecheck;
-                                echo "<br>",$pass;
                             }
                         ?>
                          <h3 class="uk-accordion-title">Sign Up</h3>

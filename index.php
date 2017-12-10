@@ -2,6 +2,7 @@
     session_start();
     require 'inc/steamauth/steamauth.php';
     require 'inc/db_connect.php';
+    require 'inc/signout_handler.php';
     include 'inc/profile_handler.php';
     include 'inc/getnews.php';
 ?>
@@ -30,7 +31,7 @@
                     <li class="navbar-li"><a class="nav-items" href="index.php">Home</a></li>
                     <li class="navbar-li"><a class="nav-items" href="index.php#team">The Team</a></li>
                     <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #latest-news">News</a></li>
-                    <div id="latest-news" uk-offcanvas="mode: push; overlay: true">
+                    <div id="latest-news" uk-offcanvas="overlay: true">
                         <div class="uk-offcanvas-bar">
                             <h3>$news_title</h3>
                             <p>$news_text</p>
@@ -40,45 +41,54 @@
                     <?php
                         if (isset($_COOKIE['userid'])) {
                             $userid = $_COOKIE['userid'];
-                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id='".$userid."'");
-                            echo
-                            '
-                                <li>
-                                    <a href="#">Welcome back '.$fetchusername_cookie['username'].'(Signed in through COOKIE)</a>
-                                    <div class="uk-navbar-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="#">Profile</a></li>
-                                            <li><a href="#">Settings</a></li>
-                            ';
-                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
-                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                            $fetchusername_cookie = $conn->query("SELECT username, user_role FROM users WHERE id='".$userid."'");
+                            while ($fetched_userinfo = $fetchusername_cookie->fetch_assoc()) {
+                                $username_cookie = $fetched_userinfo['username'];
+                                $userrole = $fetched_userinf['user_role'];
                             }
                             echo
                             '
-                                        </ul>
+                                <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #userinterface">'.$username_cookie.'</a></li>
+                                <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
+                                    <div class="uk-offcanvas-bar">
+                                        <div class="uk-card-badge uk-label">'.$username_cookie.'</div>
+                                        <li class="user-li"><a class="user-nav-items" href="#">Profile</a></li>
+                                        <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                            ';
+                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                                echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                        <li class="user-li"><a class="user-nav-items" href="?clogout">Logout</a></li>
                                     </div>
-                                </li>
+                                </div>
                             ';
                         }
                         elseif (isset($_SESSION['id'])) {
-                            $fetchusername_session = $conn->query("SELECT username FROM users WHERE id='".$userid."'");
-                            echo
-                            '
-                                <li>
-                                    <a href="#">Welcome back '.$username_session['username'].' (Signed in through SESSION)</a>
-                                    <div class="uk-navbar-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="#">Profile</a></li>
-                                            <li><a href="#">Settings</a></li>
-                            ';
-                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
-                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                            $userid = $_SESSION['id'];
+                            $fetchusername_session = $conn->query("SELECT username, user_role FROM users WHERE id='".$userid."'");
+                            while ($fetched_userinfo = $fetchusername_session->fetch_assoc()) {
+                                $username_session = $fetched_userinfo['username'];
+                                $userrole = $fetched_userinf['user_role'];
                             }
                             echo
                             '
-                                        </ul>
+                                <li class="navbar-li"><a class="nav-items" href="#" uk-toggle="target: #userinterface">'.$username_session.'</a></li>
+                                <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
+                                    <div class="uk-offcanvas-bar">
+                                        <div class="uk-card-badge uk-label">'.$username_session.'</div>
+                                        <li class="user-li"><a class="user-nav-items" href="#">Profile</a></li>
+                                        <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                            ';
+                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
+                                echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                        <li class="user-li"><a class="user-nav-items" href="?slogout">Logout</a></li>
                                     </div>
-                                </li>
+                                </div>
                             ';
                         }
                         elseif (isset($steamprofile['steamid'])) {
@@ -86,8 +96,8 @@
                             $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='".$id."'");
                             echo
                             '
-                                <li>
-                                    <a href="#">Welcome back '.$fetchusername_session_steam['username'].' (Signed in through SESSION Steam)</a>
+                                <li class="navbar-li">
+                                    <a class="nav-items" href="#">Welcome back '.$fetchusername_session_steam['username'].' (Signed in through SESSION Steam)</a>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                             <li><a href="#">Profile</a></li>

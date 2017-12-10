@@ -69,6 +69,15 @@ a:hover {
     transform: rotate(5deg);
     position: absolute;
 }
+.user-li {
+    list-style-type: none;
+    display: block;
+}
+.user-nav-items {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
 /*---------- End Navbar ------------*/
 
 /*----- First Section ------*/
