@@ -37,12 +37,14 @@
                                     $usernameErr = "Please fill in a username!<br>";
                                 } else {
                                     $name = url_input($_POST["username"]);
+                                    $loginname = True;
                                 }
 
                                 if (empty($_POST["email"])) {
                                     $passwordErr = "Please fill in a password!<br>";
                                 } else {
                                     $password = url_input($_POST["password"]);
+                                    $loginpass = True;
                                 }
                             }
 
@@ -51,6 +53,23 @@
                               $data = stripslashes($data);
                               $data = htmlspecialchars($data);
                               return $data;
+                            }
+
+                            if ($loginname && $loginpass) {
+                                $finduser = "SELECT * FROM users WHERE username='".$name."'";
+                                $verifylogin = $conn->query($finduser);
+                                if (password_verify($password, $verifylogin['password'])) {
+                                    echo "Login succes!";
+                                    if ($_POST['rememberMe'] == "true") {
+                                        //save cookie for 1 year
+                                    }
+                                    else {
+                                        //save just for session
+                                    }
+                                }
+                                else {
+                                    echo "Failed to verify user identity!";
+                                }
                             }
                         ?>
                          <h3 class="uk-accordion-title">Login</h3>
@@ -119,8 +138,9 @@
                             }
 
                             if ($passSuc && $emailSuc && $unamecheck) {
+                                $rnd_verify_id = rand(53685, 89520)
                                 $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
-                                $createuser = "INSERT INTO users (username, password, email) VALUES ('$username', '$hashed_pass', '".mysqli_real_escape_string($conn, $email)."')";
+                                $createuser = "INSERT INTO users (username, password, email, email_verify_id) VALUES ('$username', '$hashed_pass', '".mysqli_real_escape_string($conn, $email)."', $rnd_verify_id)";
                                 $conn->query($createuser) or die($conn->error);
                                 echo "User created";
                             }
