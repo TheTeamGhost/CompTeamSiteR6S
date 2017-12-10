@@ -123,7 +123,7 @@
         </nav>
         <img class="banner loading" src="img/banner_header.png" alt="banner image">
         <section id="team" class="first-section">
-            <ul uk-tab="animation: uk-animation-slide-left, uk-animation-slide-right">
+            <ul class="uk-flex-center" uk-tab="animation: uk-animation-slide-left, uk-animation-slide-right">
                 <?php
                     $fetch_username = $conn->query('SELECT username FROM users WHERE active="1"');
                     while ($parsed_username =  $fetch_username->fetch_assoc()) {
