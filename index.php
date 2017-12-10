@@ -40,7 +40,7 @@
                     <?php
                         if (isset($_COOKIE['userid'])) {
                             $userid = $_COOKIE['userid'];
-                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id=$userid");
+                            $fetchusername_cookie = $conn->query("SELECT username FROM users WHERE id='".$userid."'");
                             echo
                             '
                                 <li>
@@ -61,7 +61,7 @@
                             ';
                         }
                         elseif (isset($_SESSION['id'])) {
-                            $fetchusername_session = $conn->query("SELECT username FROM users WHERE id='$userid'");
+                            $fetchusername_session = $conn->query("SELECT username FROM users WHERE id='".$userid."'");
                             echo
                             '
                                 <li>
@@ -83,7 +83,7 @@
                         }
                         elseif (isset($steamprofile['steamid'])) {
                             $id = $steamprofile['steamid'];
-                            $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='{$id}'");
+                            $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='".$id."'");
                             echo
                             '
                                 <li>

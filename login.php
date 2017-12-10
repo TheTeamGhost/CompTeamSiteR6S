@@ -1,6 +1,7 @@
 <?php
     session_start();
     require 'inc/steamauth/steamauth.php';
+    require 'inc/db_connect.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,7 @@
      <body>
           <section class="mid-section">
                <ul uk-accordion>
-                    <li class="uk-open">
+                    <li>
                         <?php
                             // define variables and set to empty values
                             $usernameErr = $passwordErr ="";
@@ -59,7 +60,7 @@
                                    <div class="uk-margin">
                                         <div class="uk-inline">
                                              <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                             <input name="username" class="uk-input" type="text">
+                                             <input name="username" class="uk-input" type="text" value="<?php echo $name; ?>">
                                         </div>
                                    </div>
                                    <div class="uk-margin">
@@ -96,16 +97,31 @@
                             $username = $email = "";
 
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                              if (empty($_POST["username"])) {
+                              if (empty($_POST["unameregister"])) {
                                 $nameErr = "UserName is required!<br>";
                               } else {
-                                $username = url2_input($_POST["name"]);
+                                $username = url2_input($_POST["unameregister"]);
+                                $login = $conn->query("SELECT username FROM Users WHERE username = '".$username."'");
+                                if ($username == $login['username']) {
+                                    $nameErr = "Username already in use!<br>";
+                                }
+                                else {
+                                    $unamecheck = True;
+                                }
                               }
 
                               if (empty($_POST["email"])) {
                                 $emailErr = "Email is required!<br>";
                               } else {
                                 $email = url2_input($_POST["email"]);
+                                $emailSuc = True;
+                              }
+
+                              if (empty($_POST["password"])) {
+                                $passErr = "Password is required!<br>";
+                              } else {
+                                $pass = url2_input($_POST["passregister"]);
+                                $passSuc = True;
                               }
                             }
 
@@ -121,14 +137,14 @@
                               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                    <fieldset class="uk-fieldset">
                                         <div class="uk-margin">
-                                             <input name="username" class="uk-input" type="text" placeholder="Username">
+                                             <input name="unameregister" class="uk-input" type="text" placeholder="Username">
                                         </div>
                                         <div class="uk-margin-medium">
-                                             <input name="email" class="uk-input" type="text" placeholder="e-mail">
+                                             <input name="email" class="uk-input" type="email" placeholder="e-mail" value="<?php echo $email; ?>">
                                         </div>
                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                              <p class="uk-margin-right">Password:</p>
-                                             <input name="password" id="Password" class="uk-input" type="password" placeholder="Password">
+                                             <input name="passregister" id="Password" class="uk-input" type="password" placeholder="Password">
                                              <p class="uk-margin-right">Confirm Password:</p>
                                              <input class="uk-input" id="ConfirmPassword" type="password" placeholder="Confirm Password" onchange="checkPasswordMatch();">
                                         </div>
@@ -136,12 +152,12 @@
                                             <p id="CheckPasswordMatch"></p>
                                         </div>
                                         <?php
-                                            if (!empty($nameErr) || !empty($emailErr)) {
+                                            if (!empty($nameErr) || !empty($emailErr) || !empty($passErr)) {
                                                 echo
                                                 '
                                                     <div class="smooth infoBox uk-alert-danger" uk-alert>
                                                         <p>';
-                                                echo $nameErr, $emailErr;
+                                                echo $nameErr, $emailErr, $passErr;
                                                 echo
                                                 '
                                                         </p>
