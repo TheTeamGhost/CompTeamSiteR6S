@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require 'inc/steamauth/steamauth.php';
     require 'inc/db_connect.php';
 ?>
@@ -34,17 +33,17 @@
                             $name = $password = "";
 
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                              if (empty($_POST["username"])) {
-                                $usernameErr = "Please fill in a username!<br>";
-                              } else {
-                                $name = url_input($_POST["username"]);
-                              }
+                                if (empty($_POST["username"])) {
+                                    $usernameErr = "Please fill in a username!<br>";
+                                } else {
+                                    $name = url_input($_POST["username"]);
+                                }
 
-                              if (empty($_POST["email"])) {
-                                $passwordErr = "Please fill in a password!<br>";
-                              } else {
-                                $password = url_input($_POST["password"]);
-                              }
+                                if (empty($_POST["email"])) {
+                                    $passwordErr = "Please fill in a password!<br>";
+                                } else {
+                                    $password = url_input($_POST["password"]);
+                                }
                             }
 
                             function url_input($data) {
@@ -97,39 +96,38 @@
                             $username = $email = "";
 
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                              if (empty($_POST["unameregister"])) {
-                                $nameErr = "UserName is required!<br>";
-                              } else {
-                                $username = url2_input($_POST["unameregister"]);
-                                $login = $conn->query("SELECT username FROM Users WHERE username = '".$username."'");
-                                if ($username == $login['username']) {
-                                    $nameErr = "Username already in use!<br>";
-                                }
-                                else {
+                                if (empty($_POST["username_register"])) {
+                                    $nameErr = "UserName is required!<br>";
+                                } else {
+                                    $username = url_input($_POST["username_register"]);
                                     $unamecheck = True;
                                 }
-                              }
 
-                              if (empty($_POST["email"])) {
-                                $emailErr = "Email is required!<br>";
-                              } else {
-                                $email = url2_input($_POST["email"]);
-                                $emailSuc = True;
-                              }
+                                if (empty($_POST["email"])) {
+                                    $emailErr = "Email is required!<br>";
+                                } else {
+                                    $email = url_input($_POST["email"]);
+                                    $emailSuc = True;
+                                }
 
-                              if (empty($_POST["password"])) {
-                                $passErr = "Password is required!<br>";
-                              } else {
-                                $pass = url2_input($_POST["passregister"]);
-                                $passSuc = True;
-                              }
+                                if (empty($_POST["passregister"])) {
+                                    $passErr = "Password is required!<br>";
+                                } else {
+                                    $pass = url_input($_POST["passregister"]);
+                                    $passSuc = True;
+                                }
                             }
 
-                            function url2_input($data) {
-                              $data = trim($data);
-                              $data = stripslashes($data);
-                              $data = htmlspecialchars($data);
-                              return $data;
+                            if ($passSuc && $emailSuc && $unamecheck) {
+                                $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+                                $createuser = "INSERT INTO users (username, password, email) VALUES ('$username', '$hashed_pass', '".mysqli_real_escape_string($conn, $email)."')";
+                                $conn->query($createuser) or die($conn->error);
+                                echo "User created";
+                            }
+                            else {
+                                echo "Failed to create user";
+                                echo "p", $passSuc, "e", $emailSuc, "u", $unamecheck;
+                                echo "<br>",$pass;
                             }
                         ?>
                          <h3 class="uk-accordion-title">Sign Up</h3>
@@ -137,7 +135,7 @@
                               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                    <fieldset class="uk-fieldset">
                                         <div class="uk-margin">
-                                             <input name="unameregister" class="uk-input" type="text" placeholder="Username">
+                                             <input name="username_register" class="uk-input" type="text" placeholder="Username" value="<?php echo $username; ?>">
                                         </div>
                                         <div class="uk-margin-medium">
                                              <input name="email" class="uk-input" type="email" placeholder="e-mail" value="<?php echo $email; ?>">

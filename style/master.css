@@ -36,6 +36,10 @@ a {
 a:hover {
     color: white!important;
 }
+.uk-tab > .uk-active > a {
+     color: black!important;
+     border-color: black!important;
+}
 
 .mainWrapper {
     width: 110%;

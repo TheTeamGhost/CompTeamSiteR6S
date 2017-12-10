@@ -117,7 +117,7 @@
                 <?php
                     $fetch_username = $conn->query('SELECT username FROM users WHERE active="1"');
                     while ($parsed_username =  $fetch_username->fetch_assoc()) {
-                        echo '<li><a class="first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
+                        echo '<li class="active-black"><a class="first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
                     }
                 ?>
                 <li><a class="first-section-font" href="#">Become a Member</a></li>
