@@ -173,7 +173,7 @@
                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                                     <div class="uk-width-expand">
                                         <h3 class="uk-card-title uk-margin-remove-bottom">Rank</h3>
-                                        <p class="uk-text-meta uk-margin-remove-top">Rank verified:
+                                        <p class="uk-text-meta uk-margin-remove-top" title="This way you know if the rank is verified in-game by Admins" uk-tooltip>Rank verified:
                                             <?php
                                                 if ($rank_verified == "1") {
                                                     echo
@@ -231,16 +231,66 @@
                                 </div>
                             </div>
                             <div class="card-body uk-card-body">
-                                <p>Steam Account Rep:<br>
                                 <?php
-                                    $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key='.$api_key.'&steamids='.$steamid.'');
-                                    $steamBanData = json_decode($json);
-                                    $commBan = $steamBanData["players"][0]["CommunityBanned"];
+                                    if (!empty($steamid)) {
+                                        echo '<p>Steam Account Rep:<br>';
+                                        $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key='.$api_key.'&steamids='.$steamid.'');
+                                        $steamBanData = json_decode($json, true);
+                                        $commBan = $steamBanData['players'][0]["CommunityBanned"];
+                                        $VACBanned = $steamBanData['players'][0]["VACBanned"];
+                                        $countVACs = $steamBanData['players'][0]["NumberOfVACBans"];
+                                        $countBans = $steamBanData['players'][0]["NumberOfGameBans"];
+                                        $economyBan = $steamBanData['players'][0]["EconomyBan"];
+                                        if ($commBan == "true") {
+                                            echo '<p>Community Ban: <span class="verify-red" uk-icon="icon: close"></span></p>';
+                                            $trust = 1;
+                                        }
+                                        else {
+                                            echo '<p>Community Ban: <span class="verify-green" uk-icon="icon: check"></span></p>';
+                                        }
+                                        if ($VACBanned == "true") {
+                                            echo '<p>VAC Banned: <span class="verify-red" uk-icon="icon: close"></span></p>';
+                                            $trust2 = 1;
+                                        }
+                                        else {
+                                            echo '<p>VAC Banned: <span class="verify-green" uk-icon="icon: check"></span></p>';
+                                        }
+                                        if ($economyBan == "none") {
+                                            echo '<p>Trade Banned: <span class="verify-green" uk-icon="icon: check"></span></p>';
+                                        }
+                                        else {
+                                            echo '<p>Trade Banned: <span class="verify-red" uk-icon="icon: close"></span></p>';
+                                            $trust3 = 1;
+                                        }
+
+                                        $trust_result = 3 - $trust - $trust2 - $trust3;
+                                        $ban_count = 11 - $countBans - $countVACs;
+
+                                        if ($ban_count < 0) {
+                                            $trust_percentage = ((0 / 11 * 100) + ($trust_result / 3 * 100)) / 2;
+                                        }
+                                        else {
+                                            $trust_percentage = (($ban_count / 11 * 100) + ($trust_result / 3 * 100)) / 2;
+                                        }
+                                    }
+                                    else {
+                                        echo '<span class="verify-red" uk-icon="icon: close"></span><p>Steam Account not linked.<br>Cannot verify!</p>';
+                                        $trust_percentage = "";
+                                    }
                                 ?>
                                 </p>
                             </div>
                             <div class="card-footer uk-card-footer">
-                                <a class="uk-button uk-button-text"><?php echo $ranktext; ?></a>
+                                <a class="uk-button uk-button-text">
+                                <?php
+                                if (empty($trust_percentage)) {
+                                    echo 'Unable to verify Steam Account: <span class="verify-red" uk-icon="icon: close"></span>';
+                                }
+                                else {
+                                    echo round($trust_percentage, 2), "%";
+                                }
+                                ?>
+                                </a>
                             </div>
                         </div>
                     </div>

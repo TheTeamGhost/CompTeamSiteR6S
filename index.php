@@ -150,7 +150,7 @@
                                 <p>'.$parsed_userinfo2['bio'].'</p>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class="anchor uk-button uk-button-text" href="profile.php?profile='.$parsed_userinfo2['id'].'">Site profile (in the works)</a><!--Will be added later on -->
+                                        <a class="anchor uk-button uk-button-text" href="profile.php?profile='.$parsed_userinfo2['id'].'">Site profile</a><!--Will be added later on -->
                                     </div>
                                 </div>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
