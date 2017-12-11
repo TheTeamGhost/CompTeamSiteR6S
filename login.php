@@ -193,7 +193,8 @@
                     <li>
                          <h3 class="uk-accordion-title">Steam Login</h3>
                          <div class="uk-accordion-content">
-                              <a href="?login">Click here</a>
+                             <p>You need to have your Steam Account linked otherwise this won't work.</p>
+                             <a href="?login">Click here</a>
                          </div>
                     </li>
                </ul>

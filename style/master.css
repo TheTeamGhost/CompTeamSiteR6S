@@ -14,6 +14,10 @@ html {
 }
 
 body {
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'BrookLyn';
 }
 
@@ -117,4 +121,34 @@ input {
     background: -webkit-linear-gradient(to right, #1f1c2c, #928dab)!important; /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #1f1c2c, #928dab)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     box-shadow: 0px 2px 20px 7px #888888;
+}
+.mid-profile {
+    background: #f8f8f8;
+    position: relative;
+    height: 100vh;
+    border: 0 solid;
+    width: 60%;
+    left: 20%;
+    box-shadow: 0px 5px 25px 10px #f8f8f8;
+}
+
+.profile-article {
+    padding: 35px;
+}
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 49%;
+    min-width: 103%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(polina.jpg) no-repeat;
+    background-size: cover;
 }

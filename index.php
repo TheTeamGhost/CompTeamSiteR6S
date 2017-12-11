@@ -129,7 +129,7 @@
                 <?php
                     $fetch_username = $conn->query('SELECT username FROM users WHERE active="1"');
                     while ($parsed_username =  $fetch_username->fetch_assoc()) {
-                        echo '<li class="active-black"><a class="anchor first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
+                        echo '<li><a class="anchor first-section-font" href="#">'.$parsed_username['username'].'</a></li>';
                     }
                 ?>
                 <li><a class="anchor first-section-font" href="#">Become a Member</a></li>
@@ -137,19 +137,19 @@
 
             <ul class="uk-switcher uk-margin">
                 <?php
-                    $fetch_userinfo2 = $conn->query('SELECT username, quote, bio, steamid, profile_img FROM users WHERE active="1"');
+                    $fetch_userinfo2 = $conn->query('SELECT id, username, quote, bio, steamid, profile_img FROM users WHERE active="1"');
                     while ($parsed_userinfo2 =  $fetch_userinfo2->fetch_assoc()) {
                         echo
                         '
                         <li>
                             <article class="uk-article">
-                                <img class="uk-align-right profile-pic" src="img/profiles/'.$parsed_userinfo2['profile_img'].'" alt="">
+                                <img class="uk-align-right profile-pic" src="img/profiles/yimura.jpg" alt="">
                                 <h1 class="uk-article-title"><a class="anchor uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
                                 <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
                                 <p>'.$parsed_userinfo2['bio'].'</p>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
-                                        <a class="anchor uk-button uk-button-text" href="index.php">Site profile (in the works)</a><!--Will be added later on -->
+                                        <a class="anchor uk-button uk-button-text" href="profile.php?profile='.$parsed_userinfo2['id'].'">Site profile (in the works)</a><!--Will be added later on -->
                                     </div>
                                 </div>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>

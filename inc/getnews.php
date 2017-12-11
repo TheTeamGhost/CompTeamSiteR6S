@@ -1,3 +1,3 @@
 <?php
-    $news = 'SELECT title, news-text, datetime FROM news';
+    $news = 'SELECT * FROM news';
 ?>
