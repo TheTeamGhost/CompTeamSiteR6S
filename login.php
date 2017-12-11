@@ -66,8 +66,8 @@
 
                                 if (password_verify($password, $fetched_password)) {
                                     if ($_POST['rememberMe'] == "true") {
-                                        $userid = "userid";
-                                        setcookie($userid, $fetched_userid, time() + (86400 * 365), "/"); // 86400 = 1 day
+                                        $cookie_userid = $fetched_userid / 4852148;
+                                        setcookie("userid", $cookie_userid, time() + (86400 * 365), "/"); // 86400 = 1 day
                                         echo "<script> window.location.assign('index.php'); </script>";
                                     }
                                     else {

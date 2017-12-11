@@ -57,7 +57,8 @@
                         </div>
                         <?php
                             if (isset($_COOKIE['userid'])) {
-                                $userid = $_COOKIE['userid'];
+                                $cookie_userid = $_COOKIE['userid'];
+                                $userid = $cookie_userid * 4852148;
                                 $fetchusername_cookie = $conn->query("SELECT id ,username, user_role FROM users WHERE id='".$userid."'");
                                 while ($fetched_userinfo = $fetchusername_cookie->fetch_assoc()) {
                                     $username_cookie = $fetched_userinfo['username'];
@@ -165,40 +166,83 @@
                 <div class="uk-comment-body">
                     <p><?php echo $userbio; ?></p>
                 </div>
-                <div class="uk-card uk-card-default uk-width-1-2@m">
-                    <div class="uk-card-header">
-                        <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">Rank</h3>
-                                <p class="uk-text-meta uk-margin-remove-top">Rank verified:
-                                    <?php
-                                        if ($rank_verified == "1") {
-                                            echo
-                                            '
-                                                <span class="verify-green" uk-icon="icon: check"></span>
-                                            ';
-                                        }
-                                        elseif ($rank_verified == "0") {
-                                            echo
-                                            '
-                                                <span class="verify-red" uk-icon="icon: close"></span>
-                                            ';
-                                        }
-                                    ?>
-                                </p>
+                <div class="uk-child-width-expand@l uk-text-center" uk-grid-parallax>
+                    <div>
+                        <div class="card-top uk-card uk-card-default uk-grid-margin">
+                            <div class="uk-card-header">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">Rank</h3>
+                                        <p class="uk-text-meta uk-margin-remove-top">Rank verified:
+                                            <?php
+                                                if ($rank_verified == "1") {
+                                                    echo
+                                                    '
+                                                        <span class="verify-green" uk-icon="icon: check"></span>
+                                                    ';
+                                                }
+                                                elseif ($rank_verified == "0") {
+                                                    echo
+                                                    '
+                                                        <span class="verify-red" uk-icon="icon: close"></span>
+                                                    ';
+                                                }
+                                            ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body uk-card-body">
+                                <?php
+                                echo
+                                '
+                                    <img class="smooth" src="img/ranks/'.$rank.'.png" alt="">
+                                ';
+                                ?>
+                            </div>
+                            <div class="card-footer uk-card-footer">
+                                <a class="uk-button uk-button-text"><?php echo $ranktext; ?></a>
                             </div>
                         </div>
                     </div>
-                    <div class="uk-card-body">
-                        <?php
-                        echo
-                        '
-                            <img class="smooth" src="img/ranks/'.$rank.'.png" alt="">
-                        ';
-                        ?>
-                    </div>
-                    <div class="uk-card-footer">
-                        <a href="#" class="uk-button uk-button-text"><?php echo $ranktext; ?></a>
+                    <div>
+                        <div class="card-top uk-card uk-card-default uk-grid-margin">
+                            <div class="uk-card-header">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">Reputation</h3>
+                                        <p class="uk-text-meta uk-margin-remove-top">Steam Linked:
+                                            <?php
+                                                if (empty($steamid)) {
+                                                    echo
+                                                    '
+                                                        <span class="verify-red" uk-icon="icon: close"></span>
+                                                    ';
+                                                }
+                                                else {
+                                                    echo
+                                                    '
+                                                        <span class="verify-green" uk-icon="icon: check"></span>
+                                                    ';
+                                                }
+                                            ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body uk-card-body">
+                                <p>Steam Account Rep:<br>
+                                <?php
+                                    $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key='.$api_key.'&steamids='.$steamid.'');
+                                    $steamBanData = json_decode($json);
+                                    $commBan = $steamBanData["players"][0]["CommunityBanned"];
+                                ?>
+                                </p>
+                            </div>
+                            <div class="card-footer uk-card-footer">
+                                <a class="uk-button uk-button-text"><?php echo $ranktext; ?></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>

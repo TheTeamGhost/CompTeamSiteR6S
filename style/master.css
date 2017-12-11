@@ -160,3 +160,15 @@ video#bgvid {
 .verify-green {
     color: limegreen!important;
 }
+
+.card-top {
+    margin-top: 15px;
+}
+
+.card-body {
+    padding: 15px 32%!important;
+}
+
+.card-footer {
+    padding: 10px 42.5%!important;
+}

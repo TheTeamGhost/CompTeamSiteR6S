@@ -3,61 +3,61 @@ if ($rank == "20") {
     $ranktext = "Daimond";
 }
 elseif ($rank == "19") {
-    $ranktext = "Platinum I";
+    $ranktext = "Platinum<br>I";
 }
 elseif ($rank == "18") {
-    $ranktext = "Platinum II";
+    $ranktext = "Platinum<br>II";
 }
 elseif ($rank == "17") {
-    $ranktext = "Platinum III";
+    $ranktext = "Platinum<br>III";
 }
 elseif ($rank == "16") {
-    $ranktext = "Gold I";
+    $ranktext = "Gold<br>I";
 }
 elseif ($rank == "15") {
-    $ranktext = "Gold II";
+    $ranktext = "Gold<br>II";
 }
 elseif ($rank == "14") {
-    $ranktext = "Gold III";
+    $ranktext = "Gold<br>III";
 }
 elseif ($rank == "13") {
-    $ranktext = "Gold IV";
+    $ranktext = "Gold<br>IV";
 }
 elseif ($rank == "12") {
-    $ranktext = "Silver I";
+    $ranktext = "Silver<br>I";
 }
 elseif ($rank == "11") {
-    $ranktext = "Silver II";
+    $ranktext = "Silver<br>II";
 }
 elseif ($rank == "10") {
-    $ranktext = "Silver III";
+    $ranktext = "Silver<br>III";
 }
 elseif ($rank == "9") {
-    $ranktext = "Silver IV";
+    $ranktext = "Silver<br>IV";
 }
 elseif ($rank == "8") {
-    $ranktext = "Bronze I";
+    $ranktext = "Bronze<br>I";
 }
 elseif ($rank == "7") {
-    $ranktext = "Bronze II";
+    $ranktext = "Bronze<br>II";
 }
 elseif ($rank == "6") {
-    $ranktext = "Bronze III";
+    $ranktext = "Bronze<br>III";
 }
 elseif ($rank == "5") {
-    $ranktext = "Bronze IV";
+    $ranktext = "Bronze<br>IV";
 }
 elseif ($rank == "4") {
-    $ranktext = "Copper I";
+    $ranktext = "Copper<br>I";
 }
 elseif ($rank == "3") {
-    $ranktext = "Copper II";
+    $ranktext = "Copper<br>II";
 }
 elseif ($rank == "2") {
-    $ranktext = "Copper III";
+    $ranktext = "Copper<br>III";
 }
 elseif ($rank == "1") {
-    $ranktext = "Copper IV";
+    $ranktext = "Copper<br>IV";
 }
 
 ?>

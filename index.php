@@ -40,7 +40,8 @@
                     </div>
                     <?php
                         if (isset($_COOKIE['userid'])) {
-                            $userid = $_COOKIE['userid'];
+                            $cookie_userid = $_COOKIE['userid'];
+                            $userid = $cookie_userid * 4852148;
                             $fetchusername_cookie = $conn->query("SELECT id, username, user_role FROM users WHERE id='".$userid."'");
                             while ($fetched_userinfo = $fetchusername_cookie->fetch_assoc()) {
                                 $username_cookie = $fetched_userinfo['username'];
