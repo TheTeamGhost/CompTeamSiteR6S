@@ -11,7 +11,11 @@
         $userquote = $fetched_userprofile['quote'];
         $userbio = $fetched_userprofile['bio'];
         $steamid = $fetched_userprofile['steamid'];
+        $rank = $fetched_userprofile['rank'];
+        $rank_verified = $fetched_userprofile['rank_verified'];
     }
+
+    include 'inc/ranks.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -160,6 +164,42 @@
                 </header>
                 <div class="uk-comment-body">
                     <p><?php echo $userbio; ?></p>
+                </div>
+                <div class="uk-card uk-card-default uk-width-1-2@m">
+                    <div class="uk-card-header">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand">
+                                <h3 class="uk-card-title uk-margin-remove-bottom">Rank</h3>
+                                <p class="uk-text-meta uk-margin-remove-top">Rank verified:
+                                    <?php
+                                        if ($rank_verified == "1") {
+                                            echo
+                                            '
+                                                <span class="verify-green" uk-icon="icon: check"></span>
+                                            ';
+                                        }
+                                        elseif ($rank_verified == "0") {
+                                            echo
+                                            '
+                                                <span class="verify-red" uk-icon="icon: close"></span>
+                                            ';
+                                        }
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-card-body">
+                        <?php
+                        echo
+                        '
+                            <img class="smooth" src="img/ranks/'.$rank.'.png" alt="">
+                        ';
+                        ?>
+                    </div>
+                    <div class="uk-card-footer">
+                        <a href="#" class="uk-button uk-button-text"><?php echo $ranktext; ?></a>
+                    </div>
                 </div>
             </article>
         </section>

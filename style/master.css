@@ -152,3 +152,11 @@ video#bgvid {
     background: url(polina.jpg) no-repeat;
     background-size: cover;
 }
+
+.verify-red {
+    color: red!important;
+}
+
+.verify-green {
+    color: limegreen!important;
+}

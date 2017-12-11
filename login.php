@@ -146,7 +146,9 @@
                             }
 
                             if ($passSuc && $emailSuc && $unamecheck) {
-                                $rnd_verify_id = rand(53685, 89520);
+                                $rnd_int = rand(3, 32767);
+                                $rnd_int2 = rand(3, 32767);
+                                $rnd_verify_id = ($rnd_int * $rnd_int2);
                                 $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
                                 $createuser = "INSERT INTO users (username, password, email, email_verify_id) VALUES ('$username', '$hashed_pass', '".mysqli_real_escape_string($conn, $email)."', $rnd_verify_id)";
                                 $conn->query($createuser) or die($conn->error);
