@@ -117,7 +117,7 @@
                     $fetch_userinfo2 = $conn->query('SELECT * FROM users WHERE active="1"');
                     while ($parsed_userinfo2 =  $fetch_userinfo2->fetch_assoc()) {
                         $rank = $parsed_userinfo2['rank'];
-                        include 'inc/ranks.php';
+                        include 'inc/formatter.php';
                         echo
                         '
                         <li>

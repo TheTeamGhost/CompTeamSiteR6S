@@ -8,14 +8,14 @@ if (!isset($_SESSION['id'])) {
             $fetch_data = $conn->query($qry) or die ($conn->error);
             while($fetched_userdata = $fetch_data->fetch_assoc()) {
                 $id = $fetched_userdata['id'];
-                $hash = $fetch_userdata['password_hash'];
+                $hash = $fetched_userdata['password_hash'];
             }
             if ($verify_hash == $hash) {
                 $_SESSION['id'] = $id;
                 $rnd_hash = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
                 $conn->query("UPDATE users SET password_hash='$rnd_hash' WHERE id='$id'") or die($conn->error);
                 setcookie("userid", $id, time() + 86400 * 365, "/");
-                setcookie("rememberMe", $rnd_hash, time() + (86400 * 365), "/"); // 86400 = 1 day
+                setcookie("rememberMe", $rnd_hash, time() + (86400 * 365), "/");
             }
             else {
                 setcookie("userid", "", time() - 86400, "/");

@@ -80,4 +80,26 @@ elseif ($rank == "1") {
     $ranktext2 = "Copper IV";
 }
 
+
+if ($online = 0) {
+    $onlinestate = "Offline";
+}
+elseif ($online = 1) {
+    $onlinestate = "Online";
+}
+elseif ($online = 2) {
+    $onlinestate = "Busy";
+}
+elseif ($online = 3) {
+    $onlinestate = "Away";
+}
+elseif ($online = 4) {
+    $onlinestate = "Snooze";
+}
+elseif ($online = 5) {
+    $onlinestate = "Looking to Trade";
+}
+elseif ($online = 6) {
+    $onlinestate = "Looking to Play";
+}
 ?>

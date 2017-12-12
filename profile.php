@@ -16,7 +16,7 @@
         $rank_verified = $fetched_userprofile['rank_verified'];
     }
 
-    include 'inc/ranks.php';
+    include 'inc/formatter.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -121,24 +121,98 @@
         </video>
         <section class="mid-profile">
             <article class="profile-article uk-comment">
-                <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                    <div class="uk-width-auto">
-                        <img class="smooth uk-comment-avatar" src="img/profiles/yimura.jpg" width="120" height="120" alt="">
+                <div>
+                    <div uk-grid>
+                        <div class="uk-width-auto@m uk-flex-last@m">
+                            <ul class="uk-tab-right" uk-tab="connect: #component-tab-right; animation: uk-animation-fade">
+                                <li><a href="#">Userprofile</a></li>
+                                <li><a href="#">Steam</a></li>
+                                <li><a href="#" disabled>Uplay Stats</a></li>
+                            </ul>
+                        </div>
+                        <div class="uk-width-expand@m">
+                            <ul id="component-tab-right" class="uk-switcher">
+                                <li>
+                                    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img class="smooth uk-comment-avatar" src="img/profiles/yimura.jpg" width="120" height="120" alt="">
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?php echo $username; ?></a></h4>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li><?php echo $userquote; ?></li>
+                                            </ul>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li><?php echo '<a href="https://steamcommunity.com/profiles/'.$steamid.'" target="_blank">', "Steam", $usersteamname; ?></a></li>
+                                                <li><?php echo "Uplay: (Comming Soon)"; ?></li>
+                                            </ul>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p><?php echo $userbio; ?></p>
+                                    </div>
+                                </li>
+                                <?php
+                                    $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='.$api_key.'&steamids='.$steamid.'');
+                                    $steamAccountData = json_decode($json, true);
+                                    $personaname = $steamAccountData['response']['players'][0]['personaname'];
+                                    $online = $steamAccountData['response']['players'][0]['personastate'];
+                                    $profile = $steamAccountData['response']['players'][0]['avatarfull'];
+                                    $serverip = $steamAccountData['response']['players'][0]['gameserverip'];
+                                    $gameinfo = $steamAccountData['response']['players'][0]['gameextrainfo'];
+                                ?>
+                                <li>
+                                    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <?php
+                                                    echo '<img class="smooth uk-comment-avatar" src="'.$profile.'"  width="120" height="120" alt="">';
+                                            ?>
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?php print_r($personaname); ?></a></h4>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li>
+                                                    <?php
+                                                        echo $onlinestate;
+                                                    ?>
+                                                </li>
+                                            </ul>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li>
+                                                    <?php
+                                                        if (empty($gameinfo)) {
+                                                            echo "Player not Playing Currently";
+                                                        }
+                                                        else {
+                                                            echo "In-Game: ", $gameinfo;
+                                                        }
+                                                    ?>
+                                                </li>
+                                                <li>
+                                                    <?php
+                                                        if ($serverip !== "0.0.0.0") {
+                                                            echo "Player is not in joinable session.";
+                                                        }
+                                                        else {
+                                                            echo $onlinestate, '</li><li>', '<a href="steam://connect/'.$serverip.'">Join Game</a>';
+                                                        }
+                                                    ?>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p><?php echo "(For Later)"; ?></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    Uplay Profile
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="uk-width-expand">
-                        <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?php echo $username; ?></a></h4>
-                        <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                            <li><?php echo $userquote; ?></li>
-                        </ul>
-                        <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                            <li><?php echo '<a href="https://steamcommunity.com/profiles/'.$steamid.'" target="_blank">', "Steam", $usersteamname; ?></a></li>
-                            <li><?php echo "Uplay: (Comming Soon)"; ?></li>
-                        </ul>
-                    </div>
-                </header>
-                <div class="uk-comment-body">
-                    <p><?php echo $userbio; ?></p>
                 </div>
+                <hr>
                 <div class="uk-child-width-expand@l uk-text-center" uk-grid-parallax>
                     <div>
                         <div class="card-top uk-card uk-card-default uk-grid-margin">
