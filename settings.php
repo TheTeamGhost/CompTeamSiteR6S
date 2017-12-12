@@ -14,19 +14,19 @@ while ($fetched_userprofile = $fetch_userprofile->fetch_assoc()) {
     $rank_verified = $fetched_userprofile['rank_verified'];
 }
 
-$getid = (int)$_GET['profile'];
+$getid = $_GET['profile'];
 
 if (isset($_COOKIE['userid'])) {
     $cookie_userid = $_COOKIE['userid'];
-    $userid = (int)$cookie_userid * 4852148;
+    $userid = $cookie_userid * 4852148;
     if ($userid !== $getid) {
-        echo "<script> window.location.assign('index.php'); </script>";
+        echo array_diff($cookie_userid, $getid);
     }
 }
 elseif (isset($_SESSION['id'])) {
     $userid = (int)$_SESSION['id'];
     if ($userid !== $getid) {
-        echo "<script> window.location.assign('index.php'); </script>";
+        echo array_diff($cookie_userid, $getid);
     }
 }
 else {

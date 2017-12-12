@@ -94,27 +94,31 @@
                                 </div>
                             ';
                         }
-                        elseif (isset($steamprofile['steamid'])) {
-                            $id = $steamprofile['steamid'];
-                            $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='".$id."'");
-                            echo
-                            '
-                                <li class="navbar-li">
-                                    <a class="nav-items" href="#">Welcome back '.$fetchusername_session_steam['username'].' (Signed in through SESSION Steam)</a>
-                                    <div class="uk-navbar-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="#">Profile</a></li>
-                                            <li><a href="#">Settings</a></li>
-                            ';
-                            if ($userrole = 1 || $userrole = 2 || $userrole = 3 || $userrole = 4) {
-                                echo '<li><a href="#">Admin Control Panel</a></li>';
+                        elseif (isset($_SESSION['steamid'])) {
+                            $steamid = $_SESSION['steamid'];
+                            $fetchinfo_steamid_session = $conn->query("SELECT id, username, user_role, steamid FROM users WHERE steamid='".$steamid."'");
+                            while ($fetched_userinfo = $fetchinfo_steamid_session->fetch_assoc()) {
+                                $username_session = $fetched_userinfo['username'];
+                                $userrole = $fetched_userinfo['user_role'];
+                                $userid = $fetched_userinfo['id'];
                             }
                             echo
                             '
-                                            <li><a href="?logout">Logout</a></li>
-                                        </ul>
+                                <li class="navbar-li"><a class="anchor nav-items" href="#" uk-toggle="target: #userinterface">'.$username_session.'</a></li>
+                                <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
+                                    <div class="uk-offcanvas-bar">
+                                        <div class="uk-card-badge uk-label">'.$username_session.'</div>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
+                                        <li class="user-li"><a class="anchor user-nav-items" href="settings.php?profile='.$userid.'">Settings</a></li>
+                            ';
+                            if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
+                                echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
+                            }
+                            echo
+                            '
+                                        <li class="user-li"><a class="anchor user-nav-items" href="?slogout">Logout</a></li>
                                     </div>
-                                </li>
+                                </div>
                             ';
                         }
                         else {
@@ -149,7 +153,7 @@
                                 <h1 class="uk-article-title"><a class="anchor uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
                                 <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
                                 <p>'.$parsed_userinfo2['bio'].'<br></p>
-                                <p>User Rank: '.$ranktext.' </p>
+                                <p>User Rank: '.$ranktext2.' </p>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
                                         <a class="anchor uk-button uk-button-text" href="profile.php?profile='.$parsed_userinfo2['id'].'">Site profile</a><!--Will be added later on -->
