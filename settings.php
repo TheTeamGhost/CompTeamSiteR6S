@@ -14,16 +14,18 @@ while ($fetched_userprofile = $fetch_userprofile->fetch_assoc()) {
     $rank_verified = $fetched_userprofile['rank_verified'];
 }
 
+$getid = (int)$_GET['profile'];
+
 if (isset($_COOKIE['userid'])) {
     $cookie_userid = $_COOKIE['userid'];
-    $userid = $cookie_userid * 4852148;
-    if ($userid == $getid) {
+    $userid = (int)$cookie_userid * 4852148;
+    if ($userid !== $getid) {
         echo "<script> window.location.assign('index.php'); </script>";
     }
 }
 elseif (isset($_SESSION['id'])) {
-    $userid = $_SESSION['id'];
-    if ($userid == $getid) {
+    $userid = (int)$_SESSION['id'];
+    if ($userid !== $getid) {
         echo "<script> window.location.assign('index.php'); </script>";
     }
 }
@@ -52,7 +54,7 @@ include 'inc/ranks.php';
     </head>
     <body>
         <img class="banner" src="img/banner_profile.png" alt="">
-        <nav class="fixed-background uk-navbar-container">
+        <nav class="fixed-background uk-navbar-container" uk-navbar style="position: relative; z-index: 980;">
             <div class="uk-navbar-center">
                 <div class="uk-navbar-center-left"><div>
                     <ul class="uk-navbar-nav">
