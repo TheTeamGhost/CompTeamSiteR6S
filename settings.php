@@ -1,39 +1,23 @@
 <?php
-session_start();
-require 'inc/steamauth/steamauth.php';
-require 'inc/db_connect.php';
-require 'inc/signout_handler.php';
+    session_start();
+    require 'inc/steamauth/steamauth.php';
+    require 'inc/db_connect.php';
+    require 'inc/signout_handler.php';
+    require 'inc/login_check.php';
 
-$fetch_userprofile = $conn->query("SELECT * FROM users WHERE id='".$userid."'");
-while ($fetched_userprofile = $fetch_userprofile->fetch_assoc()) {
-    $username = $fetched_userprofile['username'];
-    $userquote = $fetched_userprofile['quote'];
-    $userbio = $fetched_userprofile['bio'];
-    $steamid = $fetched_userprofile['steamid'];
-    $rank = $fetched_userprofile['rank'];
-    $rank_verified = $fetched_userprofile['rank_verified'];
-}
+    $userid = $_GET['profile']
 
-$getid = $_GET['profile'];
-
-if (isset($_COOKIE['userid'])) {
-    $cookie_userid = $_COOKIE['userid'];
-    $userid = $cookie_userid * 4852148;
-    if ($userid !== $getid) {
-        echo array_diff($cookie_userid, $getid);
+    $fetch_userprofile = $conn->query("SELECT * FROM users WHERE id='".$userid."'");
+    while ($fetched_userprofile = $fetch_userprofile->fetch_assoc()) {
+        $username = $fetched_userprofile['username'];
+        $userquote = $fetched_userprofile['quote'];
+        $userbio = $fetched_userprofile['bio'];
+        $steamid = $fetched_userprofile['steamid'];
+        $rank = $fetched_userprofile['rank'];
+        $rank_verified = $fetched_userprofile['rank_verified'];
     }
-}
-elseif (isset($_SESSION['id'])) {
-    $userid = (int)$_SESSION['id'];
-    if ($userid !== $getid) {
-        echo array_diff($cookie_userid, $getid);
-    }
-}
-else {
-    echo "<script> window.location.assign('index.php'); </script>";
-}
 
-include 'inc/ranks.php';
+    include 'inc/ranks.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,35 +58,7 @@ include 'inc/ranks.php';
                             </div>
                         </div>
                         <?php
-                            if (isset($_COOKIE['userid'])) {
-                                $cookie_userid = $_COOKIE['userid'];
-                                $userid = $cookie_userid * 4852148;
-                                $fetchusername_cookie = $conn->query("SELECT id ,username, user_role FROM users WHERE id='".$userid."'");
-                                while ($fetched_userinfo = $fetchusername_cookie->fetch_assoc()) {
-                                    $username_cookie = $fetched_userinfo['username'];
-                                    $userrole = $fetched_userinfo['user_role'];
-                                    $userid = $fetched_userinfo['id'];
-                                }
-                                echo
-                                '
-                                    <li><a class="anchor" href="#" uk-toggle="target: #userinterface">'.$username_cookie.'</a></li>
-                                    <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
-                                        <div class="uk-offcanvas-bar">
-                                            <div class="uk-card-badge uk-label">'.$username_cookie.'</div>
-                                            <li class="user-li"><a class="user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
-                                            <li class="user-li"><a class="user-nav-items" href="settings.php?profile='.$userid.'">Settings</a></li>
-                                ';
-                                if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
-                                    echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
-                                }
-                                echo
-                                '
-                                            <li class="user-li"><a class="user-nav-items" href="?clogout">Logout</a></li>
-                                        </div>
-                                    </div>
-                                ';
-                            }
-                            elseif (isset($_SESSION['id'])) {
+                            if (isset($_SESSION['id'])) {
                                 $userid = $_SESSION['id'];
                                 $fetchusername_session = $conn->query("SELECT id, username, user_role FROM users WHERE id='".$userid."'");
                                 while ($fetched_userinfo = $fetchusername_session->fetch_assoc()) {

@@ -66,9 +66,12 @@
 
                                 if (password_verify($password, $fetched_password)) {
                                     if ($_POST['rememberMe'] == "true") {
-                                        $cookie_userid = $fetched_userid / 4852148;
-                                        setcookie("userid", $cookie_userid, time() + (86400 * 365), "/"); // 86400 = 1 day
-                                        echo "<script> window.location.assign('index.php'); </script>";
+                                        $_SESSION['id'] = $fetched_userid;
+                                        $rnd_hash = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+                                        $conn->query("UPDATE users SET password_hash='$rnd_hash' WHERE id='$fetched_userid'") or die($conn->error);
+                                        setcookie("userid", $fetched_userid, time() + 86400 * 365, "/");
+                                        setcookie("rememberMe", $rnd_hash, time() + (86400 * 365), "/"); // 86400 = 1 day
+                                        #echo "<script> window.location.assign('index.php'); </script>";
                                     }
                                     else {
                                         $_SESSION['id'] = $fetched_userid;
