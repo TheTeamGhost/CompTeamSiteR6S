@@ -4,8 +4,8 @@ if (!isset($_SESSION['id'])) {
         if (isset($_COOKIE['rememberMe'])) {
             $verify_hash = $_COOKIE['rememberMe'];
             $userid = $_COOKIE['userid'];
-            $qry = "SELECT id, password_hash FROM users WHERE password_hash=".$verify_hash." AND id='".$userid."'";
-            $fetch_data = $conn->query($qry);
+            $qry = "SELECT id, password_hash FROM users WHERE id='".$userid."'";
+            $fetch_data = $conn->query($qry) or die ($conn->error);
             while($fetched_userdata = $fetch_data->fetch_assoc()) {
                 $id = $fetched_userdata['id'];
                 $hash = $fetch_userdata['password_hash'];

@@ -71,7 +71,7 @@
                                         $conn->query("UPDATE users SET password_hash='$rnd_hash' WHERE id='$fetched_userid'") or die($conn->error);
                                         setcookie("userid", $fetched_userid, time() + 86400 * 365, "/");
                                         setcookie("rememberMe", $rnd_hash, time() + (86400 * 365), "/"); // 86400 = 1 day
-                                        #echo "<script> window.location.assign('index.php'); </script>";
+                                        echo "<script> window.location.assign('index.php'); </script>";
                                     }
                                     else {
                                         $_SESSION['id'] = $fetched_userid;
