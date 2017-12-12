@@ -5,6 +5,7 @@
     require 'inc/signout_handler.php';
     include 'inc/profile_handler.php';
     include 'inc/getnews.php';
+    include 'inc/ranks.php';
 ?>
 <!DOCTYPE html>
 <html class="bg-grey">
@@ -135,11 +136,11 @@
                 ?>
                 <li><a class="anchor first-section-font" href="#">Become a Member</a></li>
             </ul>
-
             <ul class="uk-switcher uk-margin">
                 <?php
-                    $fetch_userinfo2 = $conn->query('SELECT id, username, quote, bio, steamid, profile_img FROM users WHERE active="1"');
+                    $fetch_userinfo2 = $conn->query('SELECT * FROM users WHERE active="1"');
                     while ($parsed_userinfo2 =  $fetch_userinfo2->fetch_assoc()) {
+                        $rank = $parsed_userinfo2['rank'];
                         echo
                         '
                         <li>
@@ -149,11 +150,12 @@
                                 <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
                                 <p>'.$parsed_userinfo2['bio'].'</p>
                                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                                    <p>User Rank: '.$ranktext.' </p>
+                                </div>
+                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
                                         <a class="anchor uk-button uk-button-text" href="profile.php?profile='.$parsed_userinfo2['id'].'">Site profile</a><!--Will be added later on -->
                                     </div>
-                                </div>
-                                <div class="uk-grid-small uk-child-width-auto" uk-grid>
                                     <div>
                                         <a class="anchor uk-button uk-button-text" href="http://steamcommunity.com/profiles/'.$parsed_userinfo2['steamid'].'" target="_blank">Steam profile</a>
                                     </div>
