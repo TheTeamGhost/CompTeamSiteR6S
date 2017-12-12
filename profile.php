@@ -36,7 +36,7 @@
     </head>
     <body background="img/bg-profile.webm">
         <img class="banner" src="img/banner_profile.png" alt="">
-        <nav class="fixed-background uk-navbar-container" uk-navbar style="position: relative; z-index: 980;">
+        <nav class="fixed-background uk-navbar-container">
             <div class="uk-navbar-center">
                 <div class="uk-navbar-center-left"><div>
                     <ul class="uk-navbar-nav">
@@ -72,7 +72,7 @@
                                         <div class="uk-offcanvas-bar">
                                             <div class="uk-card-badge uk-label">'.$username_cookie.'</div>
                                             <li class="user-li"><a class="user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
-                                            <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                                            <li class="user-li"><a class="user-nav-items" href="settings.php?profile='.$userid.'">Settings</a></li>
                                 ';
                                 if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
                                     echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
@@ -99,7 +99,7 @@
                                         <div class="uk-offcanvas-bar">
                                             <div class="uk-card-badge uk-label">'.$username_session.'</div>
                                             <li class="user-li"><a class="user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
-                                            <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                                            <li class="user-li"><a class="user-nav-items" href="settings.php?profile='.$userid.'">Settings</a></li>
                                 ';
                                 if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
                                     echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
