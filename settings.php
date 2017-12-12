@@ -23,7 +23,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Settings <?php echo $username; ?></title>
+        <title>Editing <?php echo $username; ?></title>
         <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="style/master.css">
@@ -121,7 +121,7 @@
             <source src="img/bg-profile.mp4" type="video/mp4">
         </video>
         <section class="mid-profile">
-
+            
         </section>
     </body>
 </html>
