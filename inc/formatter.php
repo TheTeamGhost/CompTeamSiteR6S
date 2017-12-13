@@ -81,25 +81,25 @@ elseif ($rank == "1") {
 }
 
 
-if ($online = 0) {
+if ($online == 0) {
     $onlinestate = "Offline";
 }
-elseif ($online = 1) {
+elseif ($online == 1) {
     $onlinestate = "Online";
 }
-elseif ($online = 2) {
+elseif ($online == 2) {
     $onlinestate = "Busy";
 }
-elseif ($online = 3) {
+elseif ($online == 3) {
     $onlinestate = "Away";
 }
-elseif ($online = 4) {
+elseif ($online == 4) {
     $onlinestate = "Snooze";
 }
-elseif ($online = 5) {
+elseif ($online == 5) {
     $onlinestate = "Looking to Trade";
 }
-elseif ($online = 6) {
+elseif ($online == 6) {
     $onlinestate = "Looking to Play";
 }
 ?>
