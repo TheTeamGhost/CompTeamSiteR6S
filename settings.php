@@ -74,7 +74,7 @@
                                         <div class="uk-offcanvas-bar">
                                             <div class="uk-card-badge uk-label">'.$username_session.'</div>
                                             <li class="user-li"><a class="user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
-                                            <li class="user-li"><a class="user-nav-items" href="settings.php?profile='.$userid.'">Settings</a></li>
+                                            <li class="user-li"><a class="user-nav-items" href="settings.php">Settings</a></li>
                                 ';
                                 if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
                                     echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
@@ -86,31 +86,35 @@
                                     </div>
                                 ';
                             }
-                            elseif (isset($steamprofile['steamid'])) {
-                                $id = $steamprofile['steamid'];
-                                $fetchusername_session_steam = $conn->query("SELECT username FROM users WHERE steamid='".$id."'");
-                                echo
-                                '
-                                    <li class="navbar-li">
-                                        <a class="nav-items" href="#">Welcome back '.$fetchusername_session_steam['username'].' (Signed in through SESSION Steam)</a>
-                                        <div class="uk-navbar-dropdown">
-                                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                                <li><a href="#">Profile</a></li>
-                                                <li><a href="#">Settings</a></li>
-                                ';
-                                if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
-                                    echo '<li><a href="#">Admin Control Panel</a></li>';
+                            elseif (isset($_SESSION['steamid'])) {
+                                $steamid = $_SESSION['steamid'];
+                                $fetchinfo_steamid_session = $conn->query("SELECT id, username, user_role, steamid FROM users WHERE steamid='".$steamid."'");
+                                while ($fetched_userinfo = $fetchinfo_steamid_session->fetch_assoc()) {
+                                    $username_session = $fetched_userinfo['username'];
+                                    $userrole = $fetched_userinfo['user_role'];
+                                    $userid = $fetched_userinfo['id'];
                                 }
                                 echo
                                 '
-                                                <li><a href="?logout">Logout</a></li>
-                                            </ul>
+                                    <li class="navbar-li"><a class="anchor nav-items" href="#" uk-toggle="target: #userinterface">'.$username_session.'</a></li>
+                                    <div id="userinterface" uk-offcanvas="overlay: true; flip: true;">
+                                        <div class="uk-offcanvas-bar">
+                                            <div class="uk-card-badge uk-label">'.$username_session.'</div>
+                                            <li class="user-li"><a class="anchor user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
+                                            <li class="user-li"><a class="anchor user-nav-items" href="settings.php">Settings</a></li>
+                                ';
+                                if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
+                                    echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
+                                }
+                                echo
+                                '
+                                            <li class="user-li"><a class="anchor user-nav-items" href="?slogout">Logout</a></li>
                                         </div>
-                                    </li>
+                                    </div>
                                 ';
                             }
                             else {
-                                echo '<li class="profile_navbar-li"><a class="anchor profile_nav-items" href="login.php">Login</a></li>';
+                                echo "<script> window.location.assign('login.php'); </script>";
                             }
                         ?>
                     </ul>
@@ -170,87 +174,17 @@
                     <hr>
                     <div class="uk-margin">
                         <?php
+
                             echo
                             '
-                                <input name="quote" class="uk-input" type="text" placeholder="User Quote" value="'.$userquote.'">
-                                <textarea name="bio" class="uk-textarea" rows="5" placeholder="User Bio">'.$userbio.'</textarea>
+                                <input name="quote" class="uk-input" type="text" placeholder="User Quote" value="'.$quotetext.'">
+                                </div>
+                                <legend class="uk-legend">Bio:</legend>
+                                <div class="uk-margin">
+                                <textarea name="bio" class="uk-textarea" rows="5" placeholder="User Bio">'.$biotext.'</textarea>
                             ';
                         ?>
                     </div>
-                    <hr>
-                    <div class="js-upload uk-placeholder uk-text-center">
-                    <span uk-icon="icon: cloud-upload"></span>
-                    <span class="uk-text-middle">Drop image here or</span>
-                    <div uk-form-custom>
-                        <input type="file">
-                        <span class="uk-link">select one</span>
-                    </div>
-                    </div>
-
-                    <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-
-                    <script>
-
-                    var bar = document.getElementById('js-progressbar');
-
-                    UIkit.upload('.js-upload', {
-
-                        url: '',
-                        multiple: false,
-                        name: <?php echo $username ?>,
-                        allow: ".png, .jpg"
-
-                        beforeSend: function () {
-                            console.log('beforeSend', arguments);
-                        },
-                        beforeAll: function () {
-                            console.log('beforeAll', arguments);
-                        },
-                        load: function () {
-                            console.log('load', arguments);
-                        },
-                        error: function () {
-                            console.log('error', arguments);
-                        },
-                        complete: function () {
-                            console.log('complete', arguments);
-                        },
-
-                        loadStart: function (e) {
-                            console.log('loadStart', arguments);
-
-                            bar.removeAttribute('hidden');
-                            bar.max = e.total;
-                            bar.value = e.loaded;
-                        },
-
-                        progress: function (e) {
-                            console.log('progress', arguments);
-
-                            bar.max = e.total;
-                            bar.value = e.loaded;
-                        },
-
-                        loadEnd: function (e) {
-                            console.log('loadEnd', arguments);
-
-                            bar.max = e.total;
-                            bar.value = e.loaded;
-                        },
-
-                        completeAll: function () {
-                            console.log('completeAll', arguments);
-
-                            setTimeout(function () {
-                                bar.setAttribute('hidden', 'hidden');
-                            }, 1000);
-
-                            alert('Upload Completed');
-                        }
-
-                    });
-
-                    </script>
                     <hr>
                     <button type="submit" class="uk-button uk-button-text scale"> Submit </button>
                 </fieldset>

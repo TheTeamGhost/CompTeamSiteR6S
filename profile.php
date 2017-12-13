@@ -72,7 +72,7 @@
                                         <div class="uk-offcanvas-bar">
                                             <div class="uk-card-badge uk-label">'.$username_session.'</div>
                                             <li class="user-li"><a class="user-nav-items" href="profile.php?profile='.$userid.'">Profile</a></li>
-                                            <li class="user-li"><a class="user-nav-items" href="#">Settings</a></li>
+                                            <li class="user-li"><a class="user-nav-items" href="settings.php">Settings</a></li>
                                 ';
                                 if ($userrole == "1" || $userrole == "2" || $userrole == "3" || $userrole == "4") {
                                     echo '<li class="user-li"><a class="user-nav-items" href="#">Admin Control Panel</a></li>';
