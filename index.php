@@ -8,7 +8,7 @@
     include 'inc/getnews.php';
 ?>
 <!DOCTYPE html>
-<html class="bg-grey">
+<html class="bg-dark">
     <head>
         <meta charset="utf-8">
         <title>Join the Team</title>
