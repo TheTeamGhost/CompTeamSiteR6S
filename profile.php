@@ -173,7 +173,29 @@
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
                                                 <li>
                                                     <?php
-                                                        echo $onlinestate;
+                                                    switch ($online) {
+                                                        case '0':
+                                                            echo 'Offline';
+                                                            break;
+                                                        case '1':
+                                                            echo 'Online';
+                                                            break;
+                                                        case '2':
+                                                            echo 'Busy';
+                                                            break;
+                                                        case '3':
+                                                            echo 'Away';
+                                                            break;
+                                                        case '4':
+                                                            echo 'Snooze';
+                                                            break;
+                                                        case '5':
+                                                            echo 'Looking to Trade';
+                                                            break;
+                                                        case '6':
+                                                            echo 'Looking to Play';
+                                                            break;
+                                                    }
                                                     ?>
                                                 </li>
                                             </ul>

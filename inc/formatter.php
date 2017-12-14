@@ -87,27 +87,4 @@ else {
     $ranktext = "Rank not shown or hasn't been set.";
     $ranktext2 = "Rank not shown or hasn't been set.";
 }
-
-
-if ($online = 0) {
-    $onlinestate = "Offline";
-}
-elseif ($online = 1) {
-    $onlinestate = "Online";
-}
-elseif ($online = 2) {
-    $onlinestate = "Busy";
-}
-elseif ($online = 3) {
-    $onlinestate = "Away";
-}
-elseif ($online = 4) {
-    $onlinestate = "Snooze";
-}
-elseif ($online = 5) {
-    $onlinestate = "Looking to Trade";
-}
-elseif ($online = 6) {
-    $onlinestate = "Looking to Play";
-}
 ?>

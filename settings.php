@@ -61,11 +61,13 @@
                         <?php
                             if (isset($_SESSION['id'])) {
                                 $userid = $_SESSION['id'];
-                                $fetchusername_session = $conn->query("SELECT id, username, user_role FROM users WHERE id='".$userid."'");
+                                $fetchusername_session = $conn->query("SELECT id, username, quote, bio, user_role FROM users WHERE id='".$userid."'");
                                 while ($fetched_userinfo = $fetchusername_session->fetch_assoc()) {
                                     $username_session = $fetched_userinfo['username'];
                                     $userrole = $fetched_userinfo['user_role'];
                                     $userid = $fetched_userinfo['id'];
+                                    $bio = $fetched_userinfo['bio'];
+                                    $quote = $fetched_userinfo['quote'];
                                 }
                                 echo
                                 '
@@ -88,11 +90,13 @@
                             }
                             elseif (isset($_SESSION['steamid'])) {
                                 $steamid = $_SESSION['steamid'];
-                                $fetchinfo_steamid_session = $conn->query("SELECT id, username, user_role, steamid FROM users WHERE steamid='".$steamid."'");
+                                $fetchinfo_steamid_session = $conn->query("SELECT id, username, quote, bio, user_role, steamid FROM users WHERE steamid='".$steamid."'");
                                 while ($fetched_userinfo = $fetchinfo_steamid_session->fetch_assoc()) {
                                     $username_session = $fetched_userinfo['username'];
                                     $userrole = $fetched_userinfo['user_role'];
                                     $userid = $fetched_userinfo['id'];
+                                    $bio = htmlspecialchars($fetched_userinfo['bio']);
+                                    $quote = htmlspecialchars($fetched_userinfo['quote']);
                                 }
                                 echo
                                 '
@@ -126,7 +130,49 @@
             <source src="img/bg-profile.mp4" type="video/mp4">
         </video>
         <section class="mid-profile">
-            <form class="settings-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if (!empty($_POST["password"])) {
+                        $newpassword = $_POST['password'];
+                        $oldpassword = $_POST['oldpassword'];
+
+                        $finduser = "SELECT * FROM users WHERE id='".$userid."'";
+                        $verifylogin = $conn->query($finduser);
+
+                        while ($parsed_login =  $verifylogin->fetch_assoc()) {
+                            $fetched_password = $parsed_login["password"];
+                            $fetched_userid = $parsed_login["id"];
+                        }
+
+                        if (password_verify($oldpassword, $fetched_password)) {
+                            $newhash_pass = password_hash($newpassword, PASSWORD_DEFAULT);
+                            $conn->query("UPDATE users SET password='$newhash_pass' WHERE id='$fetched_userid'");
+                        }
+                        else {
+                            echo "Failed to verify user identity!";
+                        }
+                    }
+
+                    if (!empty($_POST["rank"])) {
+                        $rankid = $_POST['rank'];
+                        $update_qry = "UPDATE users SET rank='$rankid' WHERE id='$userid'";
+                        $conn->query($update_qry);
+                    }
+
+                    if (!empty($_POST["quote"])) {
+                        $newquote = htmlspecialchars($_POST['quote'], ENT_QUOTES);
+                        $update_qry = "UPDATE users SET quote='$newquote' WHERE id='$userid'";
+                        $conn->query($update_qry);
+                    }
+
+                    if (!empty($_POST["bio"])) {
+                        $newbio = htmlspecialchars($_POST['bio'], ENT_QUOTES);
+                        $update_qry = "UPDATE users SET bio='$newbio' WHERE id='$userid'";
+                        $conn->query($update_qry);
+                    }
+                }
+            ?>
+            <form class="settings-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES);?>" method="post">
                 <fieldset class="uk-fieldset">
                     <legend class="uk-legend">Editing profile</legend>
                     <hr>
@@ -141,47 +187,47 @@
                          <p class="uk-margin-right">Confirm Password:</p>
                          <input class="uk-input" id="ConfirmPassword" type="password" placeholder="Confirm Password" onchange="checkPasswordMatch();">
                     </div>
-                    <div id="infoBox" class="hidden smooth infoBox" uk-alert>
+                    <div id="infoBox" class="hidden smooth" uk-alert>
                         <p id="CheckPasswordMatch"></p>
                     </div>
                     <hr>
-                    <p>Set Your Rank:</p>
                     <div class="uk-margin">
-                        <select class="uk-select">
-                            <option value="ur">Unranked</option>
-                            <option value="c4">Copper IV</option>
-                            <option value="c3">Copper III</option>
-                            <option value="c2">Copper II</option>
-                            <option value="c1">Copper I</option>
-                            <option value="b4">Bronze IV</option>
-                            <option value="b3">Bronze III</option>
-                            <option value="b2">Bronze II</option>
-                            <option value="b1">Bronze I</option>
-                            <option value="s4">Silver IV</option>
-                            <option value="s3">Silver III</option>
-                            <option value="s2">Silver II</option>
-                            <option value="s1">Silver I</option>
-                            <option value="g4">Gold IV</option>
-                            <option value="g3">Gold III</option>
-                            <option value="g2">Gold II</option>
-                            <option value="g1">Gold I</option>
-                            <option value="p3">Platinum III</option>
-                            <option value="p2">Platinum II</option>
-                            <option value="p1">Platinum I</option>
-                            <option value="d">Daimond</option>
+                        <select name="rank" class="uk-select">
+                            <option value="0">Unranked</option>
+                            <option value="1">Copper IV</option>
+                            <option value="2">Copper III</option>
+                            <option value="3">Copper II</option>
+                            <option value="4">Copper I</option>
+                            <option value="5">Bronze IV</option>
+                            <option value="6">Bronze III</option>
+                            <option value="7">Bronze II</option>
+                            <option value="8">Bronze I</option>
+                            <option value="9">Silver IV</option>
+                            <option value="10">Silver III</option>
+                            <option value="11">Silver II</option>
+                            <option value="12">Silver I</option>
+                            <option value="13">Gold IV</option>
+                            <option value="14">Gold III</option>
+                            <option value="15">Gold II</option>
+                            <option value="16">Gold I</option>
+                            <option value="17">Platinum III</option>
+                            <option value="18">Platinum II</option>
+                            <option value="19">Platinum I</option>
+                            <option value="20">Daimond</option>
                         </select>
                     </div>
                     <hr>
+                    <legend class="uk-legend">Quote:</legend>
                     <div class="uk-margin">
                         <?php
 
                             echo
                             '
-                                <input name="quote" class="uk-input" type="text" placeholder="User Quote" value="'.$quotetext.'">
+                                <input name="quote" class="uk-input" type="text" placeholder="User Quote" value="'.$quote.'">
                                 </div>
                                 <legend class="uk-legend">Bio:</legend>
                                 <div class="uk-margin">
-                                <textarea name="bio" class="uk-textarea" rows="5" placeholder="User Bio">'.$biotext.'</textarea>
+                                <textarea name="bio" class="uk-textarea" rows="5" placeholder="User Bio">'.$bio.'</textarea>
                             ';
                         ?>
                     </div>

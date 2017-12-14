@@ -32,6 +32,9 @@ body {
 input {
     border-radius: 3px!important;
 }
+textarea {
+    border-radius: 3px!important;
+}
 .smooth {
     border-radius: 3px;
 }
