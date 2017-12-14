@@ -4,6 +4,7 @@
     require 'inc/db_connect.php';
     require 'inc/signout_handler.php';
     require 'inc/login_check.php';
+    require 'inc/settings/steamauth.php';
 
     $userid = $_SESSION['id'];
 
@@ -61,13 +62,14 @@
                         <?php
                             if (isset($_SESSION['id'])) {
                                 $userid = $_SESSION['id'];
-                                $fetchusername_session = $conn->query("SELECT id, username, quote, bio, user_role FROM users WHERE id='".$userid."'");
+                                $fetchusername_session = $conn->query("SELECT id, username, quote, bio, steamid, user_role FROM users WHERE id='".$userid."'");
                                 while ($fetched_userinfo = $fetchusername_session->fetch_assoc()) {
                                     $username_session = $fetched_userinfo['username'];
                                     $userrole = $fetched_userinfo['user_role'];
                                     $userid = $fetched_userinfo['id'];
-                                    $bio = $fetched_userinfo['bio'];
-                                    $quote = $fetched_userinfo['quote'];
+                                    $bio = htmlspecialchars($fetched_userinfo['bio']);
+                                    $quote = htmlspecialchars($fetched_userinfo['quote']);
+                                    $steamid = $fetched_userinfo['steamid'];
                                 }
                                 echo
                                 '
@@ -90,13 +92,14 @@
                             }
                             elseif (isset($_SESSION['steamid'])) {
                                 $steamid = $_SESSION['steamid'];
-                                $fetchinfo_steamid_session = $conn->query("SELECT id, username, quote, bio, user_role, steamid FROM users WHERE steamid='".$steamid."'");
+                                $fetchinfo_steamid_session = $conn->query("SELECT id, username, quote, bio, steamid, user_role FROM users WHERE steamid='".$steamid."'");
                                 while ($fetched_userinfo = $fetchinfo_steamid_session->fetch_assoc()) {
                                     $username_session = $fetched_userinfo['username'];
                                     $userrole = $fetched_userinfo['user_role'];
                                     $userid = $fetched_userinfo['id'];
                                     $bio = htmlspecialchars($fetched_userinfo['bio']);
                                     $quote = htmlspecialchars($fetched_userinfo['quote']);
+                                    $steamid = $fetched_userinfo['steamid'];
                                 }
                                 echo
                                 '
@@ -179,7 +182,7 @@
                     <legend class="uk-legend">Change Password</legend>
                     <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                          <p class="uk-margin-right">Old Password:</p>
-                         <input name="oldpassword" class="uk-input" type="password" placeholder="Password">
+                         <input name="oldpassword" class="uk-input" type="password" placeholder="Password" autocomplete="nope">
                     </div>
                     <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                          <p class="uk-margin-right">Password:</p>
@@ -217,10 +220,33 @@
                         </select>
                     </div>
                     <hr>
+                    <legend id="steam" class="uk-legend">Set you profile image by linking your Steam Account:</legend>
+                    <?php
+                    if (isset($_SESSION['steamid']) && !empty($steamid)) {
+                        $session_steamid = $_SESSION['steamid'];
+                        $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='.$api_key.'&steamids='.$session_steamid.'');
+                        $steamAccountData = json_decode($json, true);
+                        $profile = $steamAccountData['response']['players'][0]['avatarfull'];
+                        $conn->query("UPDATE users SET profile_img=$profile WHERE id=$userid");
+                    }
+                    elseif (!empty($steamid)){
+                        echo "<p>Steam Account already linked!</p>";
+                    }
+                    else {
+                        echo '<a href="?login-settings">Link Steam</a>';
+                    }
+                    ?>
+
+                    <!-- We'll skip this for when I try or want to try it again
+                    <form action="img/upload.php" method="post" enctype="multipart/form-data">
+                        Select profile image to upload:
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="submit" value="Upload Image" name="submit">
+                    </form>-->
+                    <hr>
                     <legend class="uk-legend">Quote:</legend>
                     <div class="uk-margin">
                         <?php
-
                             echo
                             '
                                 <input name="quote" class="uk-input" type="text" placeholder="User Quote" value="'.$quote.'">
