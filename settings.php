@@ -222,19 +222,21 @@
                     <hr>
                     <legend id="steam" class="uk-legend">Set you profile image by linking your Steam Account:</legend>
                     <?php
-                    if (isset($_SESSION['steamid']) && !empty($steamid)) {
-                        $session_steamid = $_SESSION['steamid'];
-                        $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='.$api_key.'&steamids='.$session_steamid.'');
-                        $steamAccountData = json_decode($json, true);
-                        $profile = $steamAccountData['response']['players'][0]['avatarfull'];
-                        $conn->query("UPDATE users SET profile_img=$profile WHERE id=$userid");
-                    }
-                    elseif (!empty($steamid)){
-                        echo "<p>Steam Account already linked!</p>";
-                    }
-                    else {
-                        echo '<a href="?login-settings">Link Steam</a>';
-                    }
+                        if (isset($_SESSION['steamid']) && empty($steamid)) {
+                            $session_steamid = $_SESSION['steamid'];
+                            $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='.$api_key.'&steamids='.$session_steamid.'');
+                            $steamAccountData = json_decode($json, true);
+                            $profile = $steamAccountData['response']['players'][0]['avatarfull'];
+                            $conn->query("UPDATE users SET profile_img='$profile' WHERE id='$userid'");
+                            $conn->query("UPDATE users SET steamid='$session_steamid' WHERE id='$userid'");
+                            echo "<p>Profile Image Set</p>";
+                        }
+                        elseif (!empty($steamid)){
+                            echo "<p>Steam Account already linked!</p>";
+                        }
+                        else {
+                            echo '<a href="?login-settings">Link Steam</a>';
+                        }
                     ?>
 
                     <!-- We'll skip this for when I try or want to try it again

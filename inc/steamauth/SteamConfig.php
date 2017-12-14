@@ -2,7 +2,7 @@
 //Version 3.2
 $steamauth['apikey'] = "ED748B0A1B309C7B83B2005BF3C9BEA6"; // Your Steam WebAPI-Key found at http://steamcommunity.com/dev/apikey
 $steamauth['domainname'] = "http://liamd.pw/TwisTDevelopment/"; // The main URL of your website displayed in the login page
-$steamauth['logoutpage'] = "index.php"; // Page to redirect to after a successfull logout (from the directory the SteamAuth-folder is located in) - NO slash at the beginning!
+$steamauth['logoutpage'] = "settings.php#steam"; // Page to redirect to after a successfull logout (from the directory the SteamAuth-folder is located in) - NO slash at the beginning!
 $steamauth['loginpage'] = "index.php"; // Page to redirect to after a successfull login (from the directory the SteamAuth-folder is located in) - NO slash at the beginning!
 
 // System stuff

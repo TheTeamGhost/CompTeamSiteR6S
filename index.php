@@ -122,7 +122,7 @@
                         '
                         <li>
                             <article class="uk-article">
-                                <img class="uk-align-right profile-pic" src="img/profiles/yimura.jpg" alt="">
+                                <img class="uk-align-right profile-pic" src="'.$parsed_userinfo2['profile_img'].'" alt="">
                                 <h1 class="uk-article-title"><a class="anchor uk-link-reset" href="#">'.$parsed_userinfo2['username'].'</a></h1>
                                 <p class="uk-text-lead">'.$parsed_userinfo2['quote'].'</p>
                                 <p>'.$parsed_userinfo2['bio'].'<br></p>

@@ -12,6 +12,7 @@
         $userquote = $fetched_userprofile['quote'];
         $userbio = $fetched_userprofile['bio'];
         $steamid = $fetched_userprofile['steamid'];
+        $userimg = $fetched_userprofile['profile_img'];
         $rank = $fetched_userprofile['rank'];
         $rank_verified = $fetched_userprofile['rank_verified'];
     }
@@ -135,7 +136,9 @@
                                 <li>
                                     <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
-                                            <img class="smooth uk-comment-avatar" src="img/profiles/yimura.jpg" width="120" height="120" alt="">
+                                            <?php
+                                                    echo '<img class="smooth uk-comment-avatar" src="'.$userimg.'"  width="120" height="120" alt="">';
+                                            ?>
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?php echo $username; ?></a></h4>
